@@ -2,20 +2,21 @@ Hey Ho Let's GO: Golang Workshop
 13 October 2018
 
 Fotis Nikolaidis
-PhD candidate, CEA/DAM/DIF, France
+CEA/DAM/DIF, France
 
-Presentation inspired by: Baiju Muthukadan 
+
+*Credit*: [[http://github.com/baijum/presentation/golang_workshop][Baiju Muthukadan]]
 @nogenerics
 
 * About Me
 
-- Sr. Software Engineer, Red Hat, Bangalore
-- Python Developer for 13+ years
-- FOSS Contributor (SMC, Zope, Koha, Salt etc.)
-- Founded the Swathanthra Malayalam Computing (SMC) project in 2001 while studying at REC Calicut (NIT Kozhikode)
-- Presented many technical talks and workshops in India
-- Received the first Kenneth Gonsalves Award for contributions to the Python community in India
-- Author of [[http://golang.muthukadan.net][A Comprehensive Guide to Go Programming]]
+- PhD candidate@ The French Alternative Energies and Atomic Energy Commission (CEA)
+- Receiver of Marie Curie Grant 
+- Fellow @ European Organization for Nuclear Research (CERN, IT-DSS-TAB)
+- Intern @ European Organization for Nuclear Research (CERN, LHCb)
+- Intern @ Foundation of Research and Technology (CARV)
+- Intern @ Foundation of Research and Technology (TNL)
+
 
 * Software Developer Skills
 
@@ -69,13 +70,29 @@ Skills required for a software developer:
 - Interfaces
 - Concurrency
 
-* Exercises and other activities
 
-- Exercises in ready to print format (Questions with answers): 
-[[https://www.dropbox.com/s/e7yl3gr69ky1zfl/exercises.pdf?dl=0][https://www.dropbox.com/s/e7yl3gr69ky1zfl/exercises.pdf?dl=0]]
-- Exercise sheets should be printed in A4 paper and given to participants
-- The slides are marked to stop for exercises like this: (*Exercise*: N)
-- Simple activities are mentioned in the slides itself
+* Facts
+- Moore's law is failing
+
+.image image/moores.png
+
+
+* Facts
+- Amdahls' law is raising
+
+.image image/amdahls.png
+
+
+* Larges codebase: *Thousands of developers* with *diverse background*
+- Simple language: productivity
+- Minimal boilerplate code:  avoid lines that would not exist in pseudocode
+- Reusable code: if exists, use it
+- Clean code: if something similar exists, modify it
+- Minimal side effects: one component do not accidently interfer with another
+- Formal verification: ensure that a component does what it claims to do    
+- Language ecosystem: standardize set of tools
+
+
 
 * Facts
 
@@ -132,108 +149,22 @@ keywords)
 
 .image image/gopher4.png
 
-* Installing Go Compiler on GNU/Linux
 
-- Download Go compiler binary from [[https://golang.org/dl]]
-- Extract it into your home directory (`$HOME/go`)
-- Create directory named `mygo` in your home directory (`$HOME/mygo`)
-- Add the following lines to your `$HOME/.bashrc`
+* Who uses Go?
+
+- Google
+- Uber
+- Dropbox
+- BBC
+- Docker
+- Disqus
+- SoundCloud
+- UserVoice
+- [[https://github.com/golang/go/wiki/GoUsers][https://github.com/golang/go/wiki/GoUsers]]
+- [[https://github.com/golang/go/wiki/SuccessStories][https://github.com/golang/go/wiki/SuccessStories]]
 
 
-    export GOROOT=$HOME/go
-    export PATH=$GOROOT/bin:$PATH
 
-    export GOPATH=$HOME/mygo
-    export PATH=$GOPATH/bin:$PATH
-
-- [[https://golang.org/doc/install][https://golang.org/doc/install]]
-- *Activity*: Run "go help" command and read the output for 1 minute
-
-* Building and Running
-
-- You can run the program using "go run" command: go run hello.go
-- You can also build (compile) and run the binary like this in GNU/Linux:
-
-    go build hello.go
-    ./hello
-
-(The first command produce a binary and second command executes the binary)
-
-* Formatting Code
-
-- Use "go fmt <file.go>" to format Go source file
-- No more debate about formatting!
-- Can integrate with editors like Vim, Emacs etc.
-- *Proverb*: Gofmt's style is no one's favorite, yet gofmt is everyone's favorite.
-
-(*Exercise*: 1)
-
-.image image/gopher5.png
-
-* Cross Compiling
-
-- The "go build" command produce a binary file native to the operating system and the architecture of the CPU (i386, x86_64 etc.)
-- Specify targeted platform using environment variables: GOOS & GOARCH
-- List of environment variables: [[https://golang.org/doc/install/source#environment]]
-- *Activity*: Produce binary for different operating systems and architectures
-
-* Organizing Code
-
-- *$GOPATH* directory is a workspace (sources, packages, and binaries)
-- Three sub-directories under $GOPATH: bin, pkg and src
-- *bin* directory contains executable binaries (add to $PATH)
-- The *src* directory contains the source files.
-- The *pkg* directory contains package objects used by go tool to create the final executable
-- The Go tool understands the layout of a workspace
-
-    mygo
-    |-- bin
-    |-- pkg
-    `-- src
-
-* Organizing Code ...
-
-If you are using GitHub for hosting code, you can create a directory structure under workspace like this:
-
-    src/github.com/<username>/<projectname>
-
-Replace the <username> with your GitHub username or organization name and <projectname> with the name of the project. For example:
-
-    src/github.com/baijum/introduction
-
-(*Note*: When you fork a project in GitHub use "go get" with the upstream location)
-
-* Getting third party packages
-
-- The "go get" command download source repositories and places them in the workspace
-
-    go get github.com/baijum/introduction
-    go get golang.org/x/tools/...
-
-- Repo URL and package path will be same normally (This helps Go tool to fetch)
-
-- To update use "-u" flag
-
-    go get -u github.com/baijum/introduction
-
-- [[https://golang.org/cmd/go/]]
-
-- *Activity*: Run "go get" as given above
-
-* Go Tools
-
-- Run "go help" to see list of available commands
-- Use "go help [command]" for more information about a command
-
-Few commonly used commands:
-
-- build - compile packages and dependencies
-- fmt - run gofmt on package sources
-- get - download and install packages and dependencies
-- install - compile and install packages and dependencies
-- run - compile and run Go program
-- test - test packages
-- version - print Go version
 
 * Keywords
 
@@ -785,33 +716,6 @@ Why pass by reference instead of pass by value?
 
 (*Exercise*: 7)
 
-* Who uses Go?
-
-- Google
-- Uber
-- Dropbox
-- BBC
-- Docker
-- Disqus
-- SoundCloud
-- UserVoice
-- [[https://github.com/golang/go/wiki/GoUsers][https://github.com/golang/go/wiki/GoUsers]]
-- [[https://github.com/golang/go/wiki/SuccessStories][https://github.com/golang/go/wiki/SuccessStories]]
-
-* Go Resources
-
-- Use the word "golang" to search about Go in Google, Bing etc.
-- Twitter hash-tag #golang #GopherCon #GopherConIndia
-- Official website: [[http://golang.org][http://golang.org]]
-- Official blog: [[http://blog.golang.org][http://blog.golang.org]]
-- Experiment and share Go source code: [[http://play.golang.org][http://play.golang.org]]
-- [[https://gobyexample.com][https://gobyexample.com]]
-- Forum/Mailing List: [[https://groups.google.com/forum/#!forum/golang-nuts][https://groups.google.com/forum/#!forum/golang-nuts]]
-- Subreddit: [[http://www.reddit.com/r/golang][http://www.reddit.com/r/golang]]
-- #go-nuts in the irc.freenode.net IRC network
-- Slack invitation: [[https://gophersinvite.herokuapp.com/][https://gophersinvite.herokuapp.com/]]
-- More: [[http://dave.cheney.net/resources-for-new-go-programmers][http://dave.cheney.net/resources-for-new-go-programmers]]
-
 * Go Proverbs
 
 Don't communicate by sharing memory, share memory by communicating.
@@ -854,9 +758,129 @@ Documentation is for users.
 
 Don't panic.
 
-* My Book: A Comprehensive Guide to Go Programming
 
-- [[http://golang.muthukadan.net][http://golang.muthukadan.net]]
-- Subscribe to receive first three chapters for free!
-- Send your feedback to: baiju@muthukadan.net
+
+
+
+
+* Installing Go Compiler on GNU/Linux
+
+- Download Go compiler binary from [[https://golang.org/dl]]
+- Extract it into your home directory (`$HOME/go`)
+- Create directory named `mygo` in your home directory (`$HOME/mygo`)
+- Add the following lines to your `$HOME/.bashrc`
+
+
+    export GOROOT=$HOME/go
+    export PATH=$GOROOT/bin:$PATH
+
+    export GOPATH=$HOME/mygo
+    export PATH=$GOPATH/bin:$PATH
+
+- [[https://golang.org/doc/install][https://golang.org/doc/install]]
+- *Activity*: Run "go help" command and read the output for 1 minute
+
+* Building and Running
+
+- You can run the program using "go run" command: go run hello.go
+- You can also build (compile) and run the binary like this in GNU/Linux:
+
+    go build hello.go
+    ./hello
+
+(The first command produce a binary and second command executes the binary)
+
+* Formatting Code
+
+- Use "go fmt <file.go>" to format Go source file
+- No more debate about formatting!
+- Can integrate with editors like Vim, Emacs etc.
+- *Proverb*: Gofmt's style is no one's favorite, yet gofmt is everyone's favorite.
+
+(*Exercise*: 1)
+
+.image image/gopher5.png
+
+* Cross Compiling
+
+- The "go build" command produce a binary file native to the operating system and the architecture of the CPU (i386, x86_64 etc.)
+- Specify targeted platform using environment variables: GOOS & GOARCH
+- List of environment variables: [[https://golang.org/doc/install/source#environment]]
+- *Activity*: Produce binary for different operating systems and architectures
+
+* Organizing Code
+
+- *$GOPATH* directory is a workspace (sources, packages, and binaries)
+- Three sub-directories under $GOPATH: bin, pkg and src
+- *bin* directory contains executable binaries (add to $PATH)
+- The *src* directory contains the source files.
+- The *pkg* directory contains package objects used by go tool to create the final executable
+- The Go tool understands the layout of a workspace
+
+    mygo
+    |-- bin
+    |-- pkg
+    `-- src
+
+* Organizing Code ...
+
+If you are using GitHub for hosting code, you can create a directory structure under workspace like this:
+
+    src/github.com/<username>/<projectname>
+
+Replace the <username> with your GitHub username or organization name and <projectname> with the name of the project. For example:
+
+    src/github.com/baijum/introduction
+
+(*Note*: When you fork a project in GitHub use "go get" with the upstream location)
+
+* Getting third party packages
+
+- The "go get" command download source repositories and places them in the workspace
+
+    go get github.com/baijum/introduction
+    go get golang.org/x/tools/...
+
+- Repo URL and package path will be same normally (This helps Go tool to fetch)
+
+- To update use "-u" flag
+
+    go get -u github.com/baijum/introduction
+
+- [[https://golang.org/cmd/go/]]
+
+- *Activity*: Run "go get" as given above
+
+* Go Tools
+
+- Run "go help" to see list of available commands
+- Use "go help [command]" for more information about a command
+
+Few commonly used commands:
+
+- build - compile packages and dependencies
+- fmt - run gofmt on package sources
+- get - download and install packages and dependencies
+- install - compile and install packages and dependencies
+- run - compile and run Go program
+- test - test packages
+- version - print Go version
+
+
+
+
+* Go Resources
+
+- Use the word "golang" to search about Go in Google, Bing etc.
+- Twitter hash-tag #golang #GopherCon #GopherConIndia
+- Official website: [[http://golang.org][http://golang.org]]
+- Official blog: [[http://blog.golang.org][http://blog.golang.org]]
+- Experiment and share Go source code: [[http://play.golang.org][http://play.golang.org]]
+- [[https://gobyexample.com][https://gobyexample.com]]
+- Forum/Mailing List: [[https://groups.google.com/forum/#!forum/golang-nuts][https://groups.google.com/forum/#!forum/golang-nuts]]
+- Subreddit: [[http://www.reddit.com/r/golang][http://www.reddit.com/r/golang]]
+- #go-nuts in the irc.freenode.net IRC network
+- Slack invitation: [[https://gophersinvite.herokuapp.com/][https://gophersinvite.herokuapp.com/]]
+- More: [[http://dave.cheney.net/resources-for-new-go-programmers][http://dave.cheney.net/resources-for-new-go-programmers]]
+
 
