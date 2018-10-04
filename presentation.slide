@@ -71,16 +71,15 @@ Skills required for a software developer:
 - Concurrency
 
 
-* Facts
-- Moore's law is failing
+* Moore's law is failing
+- The number of transistors on a chip doubles every year while the costs are halved
+.image image/moores.png 400 _
 
-.background image/moores.png
 
+* Amdahls' law is raising
+- Performance upper bound hen a fixed workload is moved to a more parallel environment
 
-* Facts
-- Amdahls' law is raising
-
-.background image/amdahls.png
+.image image/amdahls.png 400 _
 
 
 * Facts
@@ -107,39 +106,25 @@ keywords)
 - Safety (Type safety, Memory safety)
 - Speed (Compile time & Run time)
 
-.iframe image/go1.png
-.iframe image/go2.png
+.image image/go1.png _ 300
+.image image/go2.png _ 300
 
 
 
-
-
-* Facts
-
-- General Purpose Programming Language
-- Free/Open Source
-- Created at Google by Robert Griesemer, Rob Pike and Ken Thompson
-- Development started in 2007 and publicly released in November 2009
+* What is GO ?
+- Free/Open Source General Purpose Programming Language
+- Created at Google by Robert Griesemer, Rob Pike and Ken Thompson in 2009
 - C like syntax (no semicolons)
 - Object Oriented (Composition over inheritance - no classes!)
-
-.image image/gopher1.png
-
-* Facts ...
-
-- Compiled (Statically linked)
-- Garbage collected
-- Statically typed
-- Strongly typed
-- built-in concurrency
-- Two major compilers: gc & gccgo
+- Compiled, strongly and statically typed, structural typing
+- Memory safety, Garbage collection
+- Built-in concurrency (CSP-style)
 - 25 keywords (less than C,C++,Python etc.)
-- Classification (Capitalized are exported - public)
 
-.image image/gopher2.png
 
-* Facts ...
+* What is GO ? ..
 
+- Two major compilers: gc & gccgo
 - Fast build (in seconds)
 - Unused imports and variables raise compile error
 - Operating Systems: Windows, GNU/Linux, Mac OS X, *BSD etc.
@@ -150,13 +135,6 @@ keywords)
 - Pointers (No pointer arithmetic!)
 
 .image image/gopher3.png
-
-* Hello, ലോകമേ!
-
-.play code/hello.go
-
-- To play with Go programming online: [[http://play.golang.org]]
-- *Activity*: Replace the Malayalam text with some other language text and run
 
 
 * Who uses Go?
@@ -173,6 +151,12 @@ keywords)
 - [[https://github.com/golang/go/wiki/SuccessStories][https://github.com/golang/go/wiki/SuccessStories]]
 
 
+
+* Hello, Workshoper !
+
+.play code/hello.go
+
+- To play with Go programming online: [[http://play.golang.org]]
 
 
 * Keywords
