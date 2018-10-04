@@ -1,20 +1,29 @@
+#+theme=black
+
 Hey Ho Let's GO
 
-Golang Workshop, Fosscomm 2018
-
-Fotis Nikolaidis (nikolaidis.fotis@gmail.com)
-CEA/DAM/DIF, France
+Golang Workshop, Fosscomm Oct/2018
 
 
-*Presentation Credit*: [[http://github.com/baijum/presentation/golang_workshop][Baiju Muthukadan]]
-@nogenerics
+- Presenter:
+[[http://github.com/fnikolai][Fotis Nikolaidis]]
 
-* About Me
 
-- Receiver of Marie Curie Grant (BigStorage ITN)
-- ~3 years @ French Alternative Energies and Atomic Energy Commission (CEA/DAM/DIF)
-- ~3 years @ European Organization for Nuclear Research (IT-DSS-TAB, LHCb)
-- ~3 years @ Foundation of Research and Technology (TNL, CARV)
+- Credits:
+[[http://github.com/baijum/presentation/golang_workshop][Baiju Muthukadan]]
+[[http://www.slideshare.net/spf13/go-firstapp][Steven Francia]]
+
+
+* Fotis Nikolaidis 
+- Contact
+    nikolaidis.fotis@gmail.com
+- Experience
+    ~3 years @ French Alternative Energies and Atomic Energy Commission (CEA/DAM/DIF)
+    ~3 years @ European Organization for Nuclear Research (IT-DSS-TAB, LHCb)
+    ~3 years @ Foundation of Research and Technology (CARV, TNL)
+
+- Others
+    Receiver of ~3 years Marie Curie Grant (BigStorage ITN)
 
 
 * Ground Rules
@@ -22,19 +31,14 @@ CEA/DAM/DIF, France
 - Workshops are hard, everyone works at a different pace
 - We will move on when about 50% are ready
 - Slides are online, feel free to work ahead or catch up
-
-** Format
 - Talk -> exercise -> talk -> exercise ...
 - Short Q&A in between
 
-*Credit*: [[http://www.slideshare.net/spf13/go-firstapp][Steven Francia]]
 
 
 * Requirements
 - Experience in some other programming language (Perl, Python, C, C++, Java,..)
 - Laptop with Internet connectivity
-
-
 - Operating system with Go support (GNU/Linux or Mac OS or Windows)
 - Know how to use [[http://git-scm.com/doc][Git version control system]]
 - Comfortable with one shell (Bash, Zsh, PowerShell etc.)
@@ -53,6 +57,7 @@ CEA/DAM/DIF, France
 - Interfaces
 - Concurrency
 
+.image image/gopher.png 500 _ 
 
 * Moore's law is failing
 - The number of transistors on a chip doubles every year while the costs are halved
@@ -66,57 +71,41 @@ CEA/DAM/DIF, France
 
 
 * Facts
-Larges codebase
-- Reusable code: if exists, use it
-- Minimal boilerplate code:  avoid lines that would not exist in pseudocode
-- Minimal side effects: one component do not accidently interfer with another
 
-Thousands of developers
-- Simple language: productivity
-- Formal verification: ensure that a component does what it claims to do    
+- Larges codebase
+    - Reusable code:                if exists, use it
+    - Minimal boilerplate code:     avoid lines that would not exist in pseudocode
+    - Minimal side effects:         one component do not accidently interfer with another
 
-Diverse background
-- Language ecosystem: standardize set of tools
-- Clean code: if something similar exists, modify it
+- Thousands of developers
+    - Simple language:              productivity
+    - Formal verification:          ensure that a component does what it claims to do    
 
-
-* Why Go ?
-
-- [[http://commandcenter.blogspot.in/2012/06/less-is-exponentially-more.html][Simplicity]] (Small [[https://golang.org/ref/spec][spec]], 25 keywords)
-- Consistency
-- Readability
-- Safety (Type safety, Memory safety)
-- Speed (Compile time & Run time)
-
-.image image/go1.png _ 300
-.image image/go2.png _ 300
-
+- Diverse backgrounds
+    - Clean code:                   if something similar exists, modify it
+    - Language ecosystem:           standardize set of tools
 
 
 * What is GO ?
 - Free/Open Source General Purpose Programming Language
 - Created at Google by Robert Griesemer, Rob Pike and Ken Thompson in 2009
-- C like syntax (no semicolons)
-- Object Oriented (Composition over inheritance - no classes!)
-- Compiled, strongly and statically typed, structural typing
-- Memory safety, Garbage collection
+- Type Safety (strongly and statically typed), Memory Safety (Garbage collection)
 - Built-in concurrency (CSP-style)
-- 25 keywords (less than C,C++,Python etc.)
+- Readability  (structural typing), Small [[https://golang.org/ref/spec][spec]],
+- [[http://commandcenter.blogspot.in/2012/06/less-is-exponentially-more.html][Simplicity]], 25 keywords (less than C,C++,Python etc.)
 
+.image image/go1.png _ 300
 
 * What is GO ? ..
 
 - Two major compilers: gc & gccgo
-- Fast build (in seconds)
-- Unused imports and variables raise compile error
 - Operating Systems: Windows, GNU/Linux, Mac OS X, *BSD etc.
 - CPU Architectures: amd64, 386, arm etc.
 - Cross compilation
 - Standard library
-- No exceptions ([[https://blog.golang.org/errors-are-values][Errors are values]])
-- Pointers (No pointer arithmetic!)
+- Speed (Compile time & Run time)
 
-.image image/gopher3.png
+.image image/go2.png _ 300
 
 
 * Who uses Go?
@@ -143,8 +132,7 @@ Diverse background
 
 * Keywords
 
-- Keywords are reserved words
-- Cannot be used as identifiers
+- Keywords are reserved words that cannot be used as identifiers
 - Provide structure and meaning to the language
 
 
@@ -155,13 +143,10 @@ Diverse background
     continue     for          import       return       var
 
 - C Style Comments
-
     /* This is a multi-line comment
-       ... and this is a the second line
-    */
+       ... and this is a the second line */
 
 - C++ style Comments
-
     // Single line number
     // Starts with two slashes
 
@@ -821,4 +806,20 @@ Few commonly used commands:
 - Subreddit: [[http://www.reddit.com/r/golang][http://www.reddit.com/r/golang]]
 - More: [[http://dave.cheney.net/resources-for-new-go-programmers][http://dave.cheney.net/resources-for-new-go-programmers]]
 
+
+
+
+
+
+
+
+
+* Random 
+- C like syntax (no semicolons)
+- Object Oriented (Composition over inheritance - no classes!)
+- Fast build (in seconds)
+- Unused imports and variables raise compile error
+
+- No exceptions ([[https://blog.golang.org/errors-are-values][Errors are values]])
+- Pointers (No pointer arithmetic!)
 
