@@ -147,7 +147,8 @@ keywords)
 - Safety (Type safety, Memory safety)
 - Speed (Compile time & Run time)
 
-.image image/gopher4.png
+.image image/go1.png
+.image image/go2.png
 
 
 * Who uses Go?
