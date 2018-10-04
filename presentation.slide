@@ -74,23 +74,43 @@ Skills required for a software developer:
 * Facts
 - Moore's law is failing
 
-.image image/moores.png
+.background image/moores.png
 
 
 * Facts
 - Amdahls' law is raising
 
-.image image/amdahls.png
+.background image/amdahls.png
 
 
-* Larges codebase: *Thousands of developers* with *diverse background*
-- Simple language: productivity
-- Minimal boilerplate code:  avoid lines that would not exist in pseudocode
+* Facts
+** Larges codebase
 - Reusable code: if exists, use it
-- Clean code: if something similar exists, modify it
+- Minimal boilerplate code:  avoid lines that would not exist in pseudocode
 - Minimal side effects: one component do not accidently interfer with another
+
+** Thousands of developers
+- Simple language: productivity
 - Formal verification: ensure that a component does what it claims to do    
+
+** Diverse background
 - Language ecosystem: standardize set of tools
+- Clean code: if something similar exists, modify it
+
+
+* Why Go ?
+
+- [[http://commandcenter.blogspot.in/2012/06/less-is-exponentially-more.html][Simplicity]] (Small [[https://golang.org/ref/spec][spec]], 25 
+keywords)
+- Consistency
+- Readability
+- Safety (Type safety, Memory safety)
+- Speed (Compile time & Run time)
+
+.iframe image/go1.png
+.iframe image/go2.png
+
+
 
 
 
@@ -137,18 +157,6 @@ Skills required for a software developer:
 
 - To play with Go programming online: [[http://play.golang.org]]
 - *Activity*: Replace the Malayalam text with some other language text and run
-
-* Why Go ?
-
-- [[http://commandcenter.blogspot.in/2012/06/less-is-exponentially-more.html][Simplicity]] (Small [[https://golang.org/ref/spec][spec]], 25 
-keywords)
-- Consistency
-- Readability
-- Safety (Type safety, Memory safety)
-- Speed (Compile time & Run time)
-
-.image image/go1.png
-.image image/go2.png
 
 
 * Who uses Go?
