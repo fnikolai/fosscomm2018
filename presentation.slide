@@ -26,7 +26,7 @@ CEA/DAM/DIF, France
 - We will move on when about 50% are ready
 - Slides are online, feel free to work ahead or catch up
 
-* Format
+** Format
 - Talk -> exercise -> talk -> exercise ...
 - Short Q&A in between
 
@@ -34,15 +34,9 @@ CEA/DAM/DIF, France
 
 
 * Requirements
-** First Part
 - Experience in some other programming language (Perl, Python, C, C++, Java,..)
-
-** Second Part
 - Laptop with Internet connectivity
 - Operating system with Go support (GNU/Linux or Mac OS or Windows)
-- Install Go plugin for your text editor/IDE: [[https://muthukadan.net/article/golang-vim.html][Vim]], 
-[[http://tleyden.github.io/blog/2014/05/22/configure-emacs-as-a-go-editor-from-scratch/][Emacs]] or 
-[[https://marketplace.visualstudio.com/items?itemName=lukehoban.Go][VS Code]]
 - Know how to use [[http://git-scm.com/doc][Git version control system]]
 - Comfortable with one shell (Bash, Zsh, PowerShell etc.)
 - [[https://muthukadan.net/golang/an-introduction-to-go-programming.html][Go 1.7 compiler]] should be installed
@@ -74,24 +68,23 @@ CEA/DAM/DIF, France
 
 
 * Facts
-** Larges codebase
+Larges codebase
 - Reusable code: if exists, use it
 - Minimal boilerplate code:  avoid lines that would not exist in pseudocode
 - Minimal side effects: one component do not accidently interfer with another
 
-** Thousands of developers
+Thousands of developers
 - Simple language: productivity
 - Formal verification: ensure that a component does what it claims to do    
 
-** Diverse background
+Diverse background
 - Language ecosystem: standardize set of tools
 - Clean code: if something similar exists, modify it
 
 
 * Why Go ?
 
-- [[http://commandcenter.blogspot.in/2012/06/less-is-exponentially-more.html][Simplicity]] (Small [[https://golang.org/ref/spec][spec]], 25 
-keywords)
+- [[http://commandcenter.blogspot.in/2012/06/less-is-exponentially-more.html][Simplicity]] (Small [[https://golang.org/ref/spec][spec]], 25 keywords)
 - Consistency
 - Readability
 - Safety (Type safety, Memory safety)
@@ -143,7 +136,7 @@ keywords)
 
 
 
-* Hello, Workshoper !
+* Hello, Workshopers !
 
 .play code/hello.go
 
@@ -163,6 +156,18 @@ keywords)
     const        fallthrough  if           range        type
     continue     for          import       return       var
 
+- C Style Comments
+
+    /* This is a multi-line comment
+       ... and this is a the second line
+    */
+
+- C++ style Comments
+
+    // Single line number
+    // Starts with two slashes
+
+
 * Built-In Functions
 
 - Close channel: *close*
@@ -173,22 +178,6 @@ keywords)
 - Deletion of map elements: *delete*
 - Manipulating complex numbers: *complex*, *real*, *imag*
 - Handling panics: *panic*, *recover*
-
-* Comments
-
-- Two kinds of comments
-- C Style
-
-    /* This is a multi-line comment
-       ... and this is a the second line
-    */
-
-- C++ style
-
-    // Single line number
-    // Starts with two slashes
-
-- *Activity*: Update the `hello.go` with few comments and run
 
 * Primitive types
 
@@ -287,10 +276,9 @@ type [name] [specification]
 
 * Slices
 
-    []int, []struct{ Name string }
 
-- *[]T* is a slice with elements of type T
 - A slice points to an array of values and also includes a length.
+- *[]T* is a slice with elements of type T
 - *len(s)* returns the length of slice s
 - The length of slice can vary dynamically.
 - The expression *s[n]* accesses the nth element, starting from zero.
@@ -313,7 +301,7 @@ type [name] [specification]
 
 .play code/maps2.go /START OMIT/,/END OMIT/
 
-- the *nil* map is empty and cannot be assigned to
+- the *nil* map (not make-d) is empty and cannot be assigned to
 
 - [[https://blog.golang.org/go-maps-in-action]]
 

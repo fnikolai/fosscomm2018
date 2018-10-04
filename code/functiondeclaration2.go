@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 // START OMIT
-func div(a, b int) (int, int) {
+func div(a, b int) (quotient int, mod int) {
 	return a / b, a % b
 }
 
