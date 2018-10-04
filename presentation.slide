@@ -1,5 +1,7 @@
-Hey Ho Let's GO: Golang Workshop
-13 October 2018
+Hey Ho Let's GO
+
+Golang Workshop
+Fosscomm 2018
 
 Fotis Nikolaidis
 CEA/DAM/DIF, France
@@ -18,44 +20,33 @@ CEA/DAM/DIF, France
 - Intern @ Foundation of Research and Technology (TNL)
 
 
-* Software Developer Skills
-
-Skills required for a software developer:
-
-- Programming Language
-- Text Editor
-- Source Code Management
-- Operating System
-
-*Activity*: 5 minute group discussion (_Icebreaker_)
-
 * Ground Rules
 
 - Workshops are hard, everyone works at a different pace
 - We will move on when about 50% are ready
 - Slides are online, feel free to work ahead or catch up
 
+* Format
+- Talk -> exercise -> talk -> exercise ...
+- Short Q&A in between
+
 *Credit*: [[http://www.slideshare.net/spf13/go-firstapp][Steven Francia]]
 
-* Requirements
 
-- Experience in some other programming language (Python, Ruby, Java, C# etc.)
-- Know how to use [[http://git-scm.com/doc][Git version control system]]
-- Comfortable with one shell (Bash, Zsh, PowerShell etc.)
-- Comfortable with one text editor (Vim, Emacs, VS Code etc.)
+* Requirements
+** First Part
+- Experience in some other programming language (Perl, Python, C, C++, Java,..)
+
+** Second Part
+- Laptop with Internet connectivity
+- Operating system with Go support (GNU/Linux or Mac OS or Windows)
 - Install Go plugin for your text editor/IDE: [[https://muthukadan.net/article/golang-vim.html][Vim]], 
 [[http://tleyden.github.io/blog/2014/05/22/configure-emacs-as-a-go-editor-from-scratch/][Emacs]] or 
 [[https://marketplace.visualstudio.com/items?itemName=lukehoban.Go][VS Code]]
-- Laptop with power adapter, converters and other peripherals
-- Internet connectivity should be ensured
-- Operating system with Go support (GNU/Linux or Mac OS or Windows)
+- Know how to use [[http://git-scm.com/doc][Git version control system]]
+- Comfortable with one shell (Bash, Zsh, PowerShell etc.)
 - [[https://muthukadan.net/golang/an-introduction-to-go-programming.html][Go 1.7 compiler]] should be installed
 
-* Format
-
-- Talk -> exercise -> talk -> exercise ...
-- Short Q&A in between
-- Work on activities mentioned in the slides (depending on time availability)
 
 * Agenda
 
@@ -217,11 +208,11 @@ complex64, complex128
 
 .play code/variable1.go /START OMIT/,/END OMIT/
 
-* Variables ...
 
 - Type is explicitly specified and initialized with given values
 
 .play code/variable2.go /START OMIT/,/END OMIT/
+
 
 * Variables ...
 
@@ -280,49 +271,31 @@ type [name] [specification]
 
 * Arrays
 
-- an ordered container type with a fixed number of data
-- the arrays are the foundation for slices
-- use slice instead of an array
-- number of values in the array is called it's length
-- An array's length is part of its type, so arrays cannot be re-sized.
+- An ordered container type with a fixed number of data
 - The type *[n]T* is an array of n values of type T
-
-    colors := [3]string{"Red", "Green", "Blue"}
-    heights := [4]int{153, 146, 167, 170}
-
-* Arrays ...
-
-- if the length is different for two arrays, those are distinct incompatible types
+- Number of values in the array is called it's length
 - The built-in *len* function gives the length of array.
-- Array values can be accessed using the index syntax
+- An array's length is part of its type, so arrays cannot be re-sized.
+- if the length is different for two arrays, those are distinct incompatible types
 - The expression *s[n]* accesses the nth element, starting from zero.
 
+    heights := [4]int{153, 146, 167, 170}
     colors := [3]string{"Red", "Green", "Blue"}
     i := colors[1]
     fmt.Println(i)
+
 
 * Slices
 
     []int, []struct{ Name string }
 
-- A slice points to an array of values and also includes a length.
 - *[]T* is a slice with elements of type T
+- A slice points to an array of values and also includes a length.
 - *len(s)* returns the length of slice s
 - The length of slice can vary dynamically.
-- number of values in the slice is called it's length
-
-* Slices ...
-
-- Slices can contain any type, including other slices
-
-    colors := []string{"Red", "Green", "Blue"}
-    heights := []int{153, 146, 167, 170}
-
-* Slices ...
-
-- Slice values can be accessed using the index syntax
 - The expression *s[n]* accesses the nth element, starting from zero.
 
+    heights := []int{153, 146, 167, 170}
     colors := []string{"Red", "Green", "Blue"}
     i := colors[1]
     fmt.Println(i)
@@ -336,26 +309,25 @@ type [name] [specification]
 
 .play code/maps1.go /START OMIT/,/END OMIT/
 
-- [[https://blog.golang.org/go-maps-in-action]]
-
-* Maps ...
-
 - Maps can be initialized with *make* before use
 
 .play code/maps2.go /START OMIT/,/END OMIT/
 
 - the *nil* map is empty and cannot be assigned to
 
+- [[https://blog.golang.org/go-maps-in-action]]
+
+
 * Function declarations
 
-func [name] ([params]) [return value]
-func [name] ([params]) ([return values])
+** func [name] ([params]) [return value]
 
 A function to return sum of two _int_ values:
 
 .play code/functiondeclaration1.go /START OMIT/,/END OMIT/
 
-* Function declarations ...
+
+** func [name] ([params]) ([return values])
 
 A function with multiple returned values:
 
@@ -863,17 +835,13 @@ Few commonly used commands:
 
 
 * Go Resources
-
-- Use the word "golang" to search about Go in Google, Bing etc.
-- Twitter hash-tag #golang #GopherCon #GopherConIndia
+- Cheat-sheet [[https://github.com/a8m/go-lang-cheat-sheet]]
 - Official website: [[http://golang.org][http://golang.org]]
 - Official blog: [[http://blog.golang.org][http://blog.golang.org]]
 - Experiment and share Go source code: [[http://play.golang.org][http://play.golang.org]]
 - [[https://gobyexample.com][https://gobyexample.com]]
 - Forum/Mailing List: [[https://groups.google.com/forum/#!forum/golang-nuts][https://groups.google.com/forum/#!forum/golang-nuts]]
 - Subreddit: [[http://www.reddit.com/r/golang][http://www.reddit.com/r/golang]]
-- #go-nuts in the irc.freenode.net IRC network
-- Slack invitation: [[https://gophersinvite.herokuapp.com/][https://gophersinvite.herokuapp.com/]]
 - More: [[http://dave.cheney.net/resources-for-new-go-programmers][http://dave.cheney.net/resources-for-new-go-programmers]]
 
 
