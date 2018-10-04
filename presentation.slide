@@ -1,23 +1,20 @@
 Hey Ho Let's GO
 
-Golang Workshop
-Fosscomm 2018
+Golang Workshop, Fosscomm 2018
 
-Fotis Nikolaidis
+Fotis Nikolaidis (nikolaidis.fotis@gmail.com)
 CEA/DAM/DIF, France
 
 
-*Credit*: [[http://github.com/baijum/presentation/golang_workshop][Baiju Muthukadan]]
+*Presentation Credit*: [[http://github.com/baijum/presentation/golang_workshop][Baiju Muthukadan]]
 @nogenerics
 
 * About Me
 
-- PhD candidate@ The French Alternative Energies and Atomic Energy Commission (CEA)
-- Receiver of Marie Curie Grant 
-- Fellow @ European Organization for Nuclear Research (CERN, IT-DSS-TAB)
-- Intern @ European Organization for Nuclear Research (CERN, LHCb)
-- Intern @ Foundation of Research and Technology (CARV)
-- Intern @ Foundation of Research and Technology (TNL)
+- Receiver of Marie Curie Grant (BigStorage ITN)
+- ~3 years @ French Alternative Energies and Atomic Energy Commission (CEA/DAM/DIF)
+- ~3 years @ European Organization for Nuclear Research (IT-DSS-TAB, LHCb)
+- ~3 years @ Foundation of Research and Technology (TNL, CARV)
 
 
 * Ground Rules
@@ -36,10 +33,11 @@ CEA/DAM/DIF, France
 * Requirements
 - Experience in some other programming language (Perl, Python, C, C++, Java,..)
 - Laptop with Internet connectivity
+
+
 - Operating system with Go support (GNU/Linux or Mac OS or Windows)
 - Know how to use [[http://git-scm.com/doc][Git version control system]]
 - Comfortable with one shell (Bash, Zsh, PowerShell etc.)
-- [[https://muthukadan.net/golang/an-introduction-to-go-programming.html][Go 1.7 compiler]] should be installed
 
 
 * Agenda
