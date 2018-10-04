@@ -245,18 +245,9 @@ type [name] [specification]
 * Structs
 
 - A *struct* is a collection of fields.
-- Struct fields are accessed using a dot.
-
 .play code/struct1.go /START OMIT/,/END OMIT/
 
-* Structs ...
 
-- Person is a _struct_ type
-
-    type Person struct {
-        Name string
-        Age  int
-    }
 
 * Arrays
 
