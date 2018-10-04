@@ -51,9 +51,9 @@ Golang Workshop, Fosscomm Oct/2018
 - Reasons to use Go
 - Development environment setup
 - Types
-- Control structures
-- Data structures
 - Functions
+- Data structures
+- Control structures
 - Interfaces
 - Concurrency
 
@@ -78,7 +78,7 @@ Golang Workshop, Fosscomm Oct/2018
     - Minimal side effects:         one component do not accidently interfer with another
 
 - Thousands of developers
-    - Simple language:              productivity
+    - Simple language:              rapid productivity
     - Formal verification:          ensure that a component does what it claims to do    
 
 - Diverse backgrounds
@@ -124,11 +124,20 @@ Golang Workshop, Fosscomm Oct/2018
 
 
 * Hello, Workshopers !
+- Go programs are made up of *packages*: code organization, faster compilation 
+- Initialization logic for package goes into *init* function
+- *Uppercase* denote name visibility 
+    package main
 
-.play code/hello.go
+    import "fmt"
+
+    init(){}
+
+    func main(){
+        fmt.Println("Hello, People")
+    }
 
 - To play with Go programming online: [[http://play.golang.org]]
-
 
 * Keywords
 
@@ -196,6 +205,9 @@ complex64, complex128
 
 .play code/variable4.go /START OMIT/,/END OMIT/
 
+- Naming convention is *CamelCaseNotation*
+
+
 * Constants
 
 - Constants are declared like variables, but with the const keyword.
@@ -208,7 +220,62 @@ complex64, complex128
 
 - [[https://blog.golang.org/constants]]
 
-- *Activity*: Write a program to define the above constants and print it
+
+* Arrays
+
+- An ordered container type with a fixed number of data
+- The type *[n]T* is an array of n values of type T
+- Number of values in the array is called it's length
+- The built-in *len* function gives the length of array.
+- An array's length is part of its type, so arrays cannot be re-sized.
+- if the length is different for two arrays, those are distinct incompatible types
+- The expression *s[n]* accesses the nth element, starting from zero.
+
+    heights := [4]int{153, 146, 167, 170}
+    colors := [3]string{"Red", "Green", "Blue"}
+    i := colors[1]
+    fmt.Println(i)
+
+
+* Slices
+
+- A slice points to an array of values and also includes a length.
+- *[]T* is a slice with elements of type T
+- *len(s)* returns the length of slice s
+- The length of slice can vary dynamically.
+- The expression *s[n]* accesses the nth element, starting from zero.
+
+    heights := []int{153, 146, 167, 170}
+    colors := []string{"Red", "Green", "Blue"}
+    i := colors[1]
+    fmt.Println(i)
+
+- [[http://blog.golang.org/go-slices-usage-and-internals]]
+- [[https://blog.golang.org/slices]]
+
+* Nil slices
+
+- The zero value of a slice is _nil_
+- A _nil_ slice has a length and capacity of 0
+
+.play code/slice1.go /START OMIT/,/END OMIT/
+
+
+* Maps
+
+- A *map* maps keys to values
+
+.play code/maps1.go /START OMIT/,/END OMIT/
+
+- Maps can be initialized with *make* before use
+
+.play code/maps2.go /START OMIT/,/END OMIT/
+
+- the *nil* map (not make-d) is empty and cannot be assigned to
+
+- [[https://blog.golang.org/go-maps-in-action]]
+
+
 
 * Type declarations
 
@@ -232,53 +299,6 @@ type [name] [specification]
 
 
 
-* Arrays
-
-- An ordered container type with a fixed number of data
-- The type *[n]T* is an array of n values of type T
-- Number of values in the array is called it's length
-- The built-in *len* function gives the length of array.
-- An array's length is part of its type, so arrays cannot be re-sized.
-- if the length is different for two arrays, those are distinct incompatible types
-- The expression *s[n]* accesses the nth element, starting from zero.
-
-    heights := [4]int{153, 146, 167, 170}
-    colors := [3]string{"Red", "Green", "Blue"}
-    i := colors[1]
-    fmt.Println(i)
-
-
-* Slices
-
-
-- A slice points to an array of values and also includes a length.
-- *[]T* is a slice with elements of type T
-- *len(s)* returns the length of slice s
-- The length of slice can vary dynamically.
-- The expression *s[n]* accesses the nth element, starting from zero.
-
-    heights := []int{153, 146, 167, 170}
-    colors := []string{"Red", "Green", "Blue"}
-    i := colors[1]
-    fmt.Println(i)
-
-- [[http://blog.golang.org/go-slices-usage-and-internals]]
-- [[https://blog.golang.org/slices]]
-
-* Maps
-
-- A *map* maps keys to values
-
-.play code/maps1.go /START OMIT/,/END OMIT/
-
-- Maps can be initialized with *make* before use
-
-.play code/maps2.go /START OMIT/,/END OMIT/
-
-- the *nil* map (not make-d) is empty and cannot be assigned to
-
-- [[https://blog.golang.org/go-maps-in-action]]
-
 
 * Function declarations
 
@@ -295,121 +315,64 @@ A function with multiple returned values:
 
 .play code/functiondeclaration2.go /START OMIT/,/END OMIT/
 
-* Function declarations ...
-
-Made clearer by naming the return values:
-
-.play code/functiondeclaration3.go /START OMIT/,/END OMIT/
-
-* If Conditions
-
-- Syntax inspired by C
-- Curly brace is mandatory
-
-.play code/if1.go /START OMIT/,/END OMIT/
-
-* If Conditions ...
-
-- The if statement can start with a short statement to execute before the condition
-- Variables declared by the statement are only in scope until the end of the if
-- Variables declared inside an if short statement are also available inside any of the else blocks
-
-.play code/if2.go /START OMIT/,/END OMIT/
 
 * Errors
 
-- Go programs express error state with *error* values
-- The error type is a built-in interface
-
-    type error interface {
-        Error() string
-    }
-
-- [[https://blog.golang.org/errors-are-values][Errors are values]]
-
-* Errors ...
-
-- Functions often return an error value, and calling code should handle errors by testing whether the error equals *nil*.
+- Functions often return an built-in [[https://blog.golang.org/errors-are-values][error value]]. Nil error denotes success
+- Calling code must handle the error or the compilation will fail
 
 .play code/error1.go /START OMIT/,/END OMIT/
 
-- A nil error denotes success; a non-nil error denotes failure.
+- Blank identifier  (*_* ) can be used to ignore return values from function
+- It can also be used as import alias to invoke *init* function without using the package
 
-* Command line arguments
+    import "strconv"
+    import _ "github.com/lib/pq"
 
-- *os.Args* (slice) provides access to raw command-line arguments
-- The arguments can be accessed using slice index syntax:
-
-    os.Args[1]
-
-- Go provides a *flag* package supporting basic command-line flag parsing
-
-(*Exercise*: 2)
-
-* Packages
-
-- Every Go program is made up of packages
-- Package name must be declared in source files
-- To create executable use name of package as *main*
-- Programs start running in package main
-- All the package files resides in a directory
-
-    package main
-
-* Packages ...
-
-- Import give access to exported stuff from other packages
-- Any "unexported" names are not accessible from outside the package
-- Foo is an exported name, as is FOO. The name foo is not exported
-- By convention, package name is the same as the last element of the import path
-- Initialization logic for package goes into a function named *init*
-- Use alias to avoid package name conflict with during imports
-
-    import (
-    	   "fmt"
-
-           myfmt "github.com/baijum/fmt"
-    )
-
-* Blank identifier
-
-- Underscore (*_*) is the blank identifier
-
-- Blank identifier can be used as import alias to invoke *init* function without using the package
+    x, _ := strconv.Atoi()
 
 
-    import (
-           "database/sql"
+* If Conditions
 
-           _ "github.com/lib/pq"
-    )
+- Syntax inspired by C. Curly brace is mandatory
 
-- Blank identifier can be used to ignore return values from function
+.play code/if1.go /START OMIT/,/END OMIT/
 
-    x, _ := someFunc()
+- if statement can start with a short statement before the condition
+- Variables declared by the statement are only in scope until the end of the if
+- Variables declared are also available inside any of the else blocks
+
+.play code/if2.go /START OMIT/,/END OMIT/
+
+
+* Switch statement
+
+- The cases are evaluated top to bottom until a match is found
+- There is no automatic fall through. Use break for early termination
+- Cases can be presented in comma-separated lists
+
+.play code/switch1.go /START OMIT/,/END OMIT/
+
+* Switch statement ...
+
+If the switch has no expression it switches on true (useful to write an if-else-if-else chain)
+
+.play code/switch2.go /START OMIT/,/END OMIT/
+
+
 
 * For Loop
 
 - The only looping construct (no while loop)
-- Syntax inspired by C
+- Syntax inspired by C. Curly brace is mandatory
 - No parenthesis (not even optional)
-- Curly brace is mandatory
 
 .play code/for1.go /START OMIT/,/END OMIT/
-
-* For Loop ...
 
 - Pre and post statements can be empty (and drop the semicolons!)
 
 .play code/for2.go /START OMIT/,/END OMIT/
 
-* For Loop ...
-
-- An infinite loop can be created by removing the loop condition
-
-.play code/for3.go /START OMIT/,/END OMIT/
-
-(*Exercise*: 3)
 
 * Range Loops
 
@@ -429,33 +392,6 @@ When ranging over a map, two values are returned for each iteration.
 
 .play code/range2.go /START OMIT/,/END OMIT/
 
-* Nil slices
-
-- The zero value of a slice is _nil_
-- A _nil_ slice has a length and capacity of 0
-
-.play code/slice1.go /START OMIT/,/END OMIT/
-
-* Why capacity?
-
-.play code/cap1.go /START OMIT/,/END OMIT/
-
-* Switch statement
-
-- The cases are evaluated top to bottom until a match is found
-- There is no automatic fall through
-- Cases can be presented in comma-separated lists
-- break statements can be used to terminate a switch early
-
-* Switch statement ...
-
-.play code/switch1.go /START OMIT/,/END OMIT/
-
-* Switch statement ...
-
-If the switch has no expression it switches on true (useful to write an if-else-if-else chain)
-
-.play code/switch2.go /START OMIT/,/END OMIT/
 
 * Method declaration
 
@@ -822,4 +758,21 @@ Few commonly used commands:
 
 - No exceptions ([[https://blog.golang.org/errors-are-values][Errors are values]])
 - Pointers (No pointer arithmetic!)
+
+
+* Command line arguments
+
+- *os.Args* (slice) provides access to raw command-line arguments
+- The arguments can be accessed using slice index syntax:
+
+    os.Args[1]
+
+- Go provides a *flag* package supporting basic command-line flag parsing
+
+(*Exercise*: 2)
+
+* Why capacity?
+
+.play code/cap1.go /START OMIT/,/END OMIT/
+
 
