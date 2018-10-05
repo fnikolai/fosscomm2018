@@ -184,27 +184,21 @@ complex64, complex128
 
 * Variables
 
-- Type is explicitly specified but initialized with default zero values
-- The zero value is 0 for numeric types, false for Boolean type and empty string for strings.
-
-.play code/variable1.go /START OMIT/,/END OMIT/
-
-
-- Type is explicitly specified and initialized with given values
-
-.play code/variable2.go /START OMIT/,/END OMIT/
-
-
-* Variables ...
+- Type and initialization valures are explicitly specified
+        var year int = 2018
+        var name, place string = "Fotis", "Fosscomm"
 
 - Type is inferred from the values that is given for initialization
+	    var place = "fosscomm2018"          // string
+	    var name, presenter = "Fotis", true // string, bool
 
-.play code/variable3.go /START OMIT/,/END OMIT/
 
-- Short variable declaration inside functions (Similar to above - type is inferred from the values that is given for initialization)
-
+- Short variable declaration inside functions 
 .play code/variable4.go /START OMIT/,/END OMIT/
 
+
+
+- The default value is 0 for numbers, false for Boolean, empy string for strings
 - Naming convention is *CamelCaseNotation*
 
 
@@ -225,11 +219,8 @@ complex64, complex128
 
 - An ordered container type with a fixed number of data
 - The type *[n]T* is an array of n values of type T
-- Number of values in the array is called it's length
-- The built-in *len* function gives the length of array.
 - An array's length is part of its type, so arrays cannot be re-sized.
 - if the length is different for two arrays, those are distinct incompatible types
-- The expression *s[n]* accesses the nth element, starting from zero.
 
     heights := [4]int{153, 146, 167, 170}
     colors := [3]string{"Red", "Green", "Blue"}
@@ -239,40 +230,31 @@ complex64, complex128
 
 * Slices
 
-- A slice points to an array of values and also includes a length.
-- *[]T* is a slice with elements of type T
-- *len(s)* returns the length of slice s
-- The length of slice can vary dynamically.
-- The expression *s[n]* accesses the nth element, starting from zero.
+- A _slice_ *[]T* points to an _array_ of values of type T
+- The length of slice can vary dynamically. Can be initialized with *make* before use
+- The default value of a slice is _nil_ -> *length* and *capacity* of 0
 
-    heights := []int{153, 146, 167, 170}
-    colors := []string{"Red", "Green", "Blue"}
-    i := colors[1]
-    fmt.Println(i)
+.play code/slice.go /START OMIT/,/END OMIT/
 
 - [[http://blog.golang.org/go-slices-usage-and-internals]]
 - [[https://blog.golang.org/slices]]
 
-* Nil slices
-
-- The zero value of a slice is _nil_
-- A _nil_ slice has a length and capacity of 0
-
-.play code/slice1.go /START OMIT/,/END OMIT/
 
 
 * Maps
 
-- A *map* maps keys to values
+- A *map* maps keys to values. Can be allocated at declaration time
+    fruitWeights := map[string]int{
+        "Apple":  45,
+        "Mango":  24,
+        "Orange": 34,
+    }
 
-.play code/maps1.go /START OMIT/,/END OMIT/
+- Or before usage with the *make* keyword
 
-- Maps can be initialized with *make* before use
+.play code/maps.go /START OMIT/,/END OMIT/
 
-.play code/maps2.go /START OMIT/,/END OMIT/
-
-- the *nil* map (not make-d) is empty and cannot be assigned to
-
+- Assignment to *nil* map is provibited
 - [[https://blog.golang.org/go-maps-in-action]]
 
 
@@ -281,26 +263,63 @@ complex64, complex128
 
 type [name] [specification]
 
-- Custom types can be constructed based on built-in types (primitive or composite)
-- Examples:
-
+- Custom types can be constructed based on built-in primitives
     // Celsius represent temperature in Celsius (a float64 type)
     type Celsius float64
 
     // Names represent an array of strings with length as 5
     type Names [5]string
 
-- (Functions can bind to custom types - this is called methods)
+- Or from composite structs (a collection of fields)
+    // composite structs
+    type Person struct {
+        Name string
+        Age  int
+    }
 
-* Structs
+* Struct Declaration
 
-- A *struct* is a collection of fields.
+- Declare before usage
+	var me Person
+	me.Name = "Douglas Powers"
+	me.Actor = "Mike Myers"
+
+- Declare and initialize
+	minime := Person{
+		Name:  "Doublas Powers Jr.",
+		Actor: "Mike Myers",
+	}
+
+- Composition over inheritance 
 .play code/struct1.go /START OMIT/,/END OMIT/
 
 
 
+* Method declaration
 
-* Function declarations
+- Method is a function bound to a type (receiver) declared in the same package.
+- Method bound to a struct:
+    type Person struct {
+        Name string
+        Age  int
+    }
+
+    func (p Person) Major() bool {
+        return p.Age >= 18
+    }
+
+- Method bound to a custom type named Celsius (float64):
+
+    // Celsius represent temperature in Celsius (a float64 type)
+    type Celsius float64
+
+    func (c Celsius) Freezing() bool {
+        return c <= 0
+    }
+
+
+
+* Function declaration
 
 ** func [name] ([params]) [return value]
 
@@ -374,65 +393,17 @@ If the switch has no expression it switches on true (useful to write an if-else-
 .play code/for2.go /START OMIT/,/END OMIT/
 
 
-* Range Loops
+* Range Iterator
 
-- The _range_ form of the _for_ loop iterates over a slice or map.
+When iterating over a slice, range returns the index and a copy of the (index) element
 
 .play code/range1.go /START OMIT/,/END OMIT/
 
-When ranging over a slice, two values are returned for each iteration.
-
-- The first is the index, and the second is a copy of the element at that index.
-
-* Range with Maps
-
-When ranging over a map, two values are returned for each iteration.
-
-- The first is the key, and the second is a copy of the value.
+When iterating over a map, range returns the key and a copy of the (key) element
 
 .play code/range2.go /START OMIT/,/END OMIT/
 
-
-* Method declaration
-
-- Method is a function bound to a type (receiver)
-
-    func ([receiver]) [name] ([params]) ([return values])
-
-- A receiver could be any type with a name
-
-* Method declaration ...
-
-- Method bound to a struct:
-
-    type Person struct {
-        Name string
-        Age  int
-    }
-
-    func (p Person) Major() bool {
-        return p.Age >= 18
-    }
-
-* Method declaration ...
-
-- Method bound to a custom type named Celsius (float64):
-
-    // Celsius represent temperature in Celsius (a float64 type)
-    type Celsius float64
-
-    func (c Celsius) Freezing() bool {
-        return c <= 0
-    }
-
-* Method declaration ...
-
-- Constraint: Methods can be defined only on types declared in the same package.
-
-    // This won't compile
-    func (s string) Length() int { return len(s) }
-
-(*Exercise*: 4)
+- Apart from syntantic sugar, _Range_ provides locality optimization 
 
 * Pointers
 

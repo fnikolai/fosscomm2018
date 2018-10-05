@@ -4,8 +4,8 @@ import "fmt"
 
 func main() {
 	// START OMIT
-	i := 42               // int
-	s, b := "Baiju", true // string, bool
-	fmt.Printf("%#v, %#v, %#v\n", i, s, b)
+	place := "fosscomm2018"          // string
+	name, presenter := "Fotis", true // string, bool
+	fmt.Printf("%#v, %#v, %#v\n", name, place, presenter)
 	// END OMIT
 }

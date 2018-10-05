@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	// START OMIT
-	var fruits = map[string]int{
+	fruits := map[string]int{
 		"Apple":  45,
 		"Mango":  24,
 		"Orange": 34,
