@@ -5,15 +5,20 @@ import (
 	"fmt"
 )
 
+var (
+	attendees        map[string]Attendee
+	knownLanguages          = []string{"perl", "python", "c"}
+	checkForLanguage string = "python"
+)
+
 
 type Person struct {
 	Name string
 	Age int	
 }
 
-// Struct can be built as composition of other structs
 type Attendee struct {
-	Person
+	/* FILL: Struct can be built as composition of other structs */
 	language string
 }
 
@@ -31,11 +36,18 @@ func (a Attendee) KnowsC() bool {
 }
 
 
+
+// Scan: finds the attendees who know the language and returns a list with their names
 func scan(attendees map[string]Attendee, language string) ([]string, error) {
 	// error is a value
 	if attendees == nil {
 		return nil, errors.New("NIL map was given")
 	}
+
+	if !stringInSlice(language, knownLanguages) {
+		return nil, errors.New("invalid language")
+	}
+
 
 	// Declare a slice 
 	var knowers []string
@@ -47,55 +59,61 @@ func scan(attendees map[string]Attendee, language string) ([]string, error) {
 		switch {
 			case language == "perl" :
 				if attendee.KnowsPerl() {
-					// Append automatically allocates the needed space for slice
-					knowers = append(knowers, attendee.Name)
+					/* FILL: append() automatically allocates the needed space for slice */
 				}
 				
 			case language == "python" :
 			 	if attendee.KnowsPython() {
-					knowers = append(knowers, attendee.Name)
+					/* FILL: append() automatically allocates the needed space for slice */
 				}
 				
 			case language == "c" :
 				if attendee.KnowsC() {
-					knowers = append(knowers, attendee.Name)
+					/* FILL: append() automatically allocates the needed space for slice */
 				}
 			default:
 				return nil, errors.New("Invalid language")	
 		}
-	}	
-
-	if len(knowers) == 0 {	
-		return nil, errors.New("Maria is not happy with you ...")
+	}
+	
+	if len(knowers) == 0 {
+		return nil, errors.New("no one knows this language, sorry")
 	}
 
-	return knowers, nil
+	/* FILL: Return the knower list and denote successe */
 }
 
 
-// Just a demo variable
-var checkForLanguage string = "python"
 
 func main() {
 	fmt.Println("Hello, playground")
 
 	attendees := map[string]Attendee{
 		// Define values in field order - similar to function calling
-		"at0": Attendee{Person{Name: "Maria", Age: 17}, "python"},
-		
+		"at0": Attendee{Person{Name: "Maria", Age: 17}, knownLanguages[0]},
+
 		// Define values with named fields - order does not matter
-		"at1": Attendee{Person: Person{Name:"Eleni", Age:56}, language: "c"},
-		
+		"at1": Attendee{Person: Person{Name: "Eleni", Age: 56}, language: knownLanguages[1]},
+
 		// Define values with named fields - order does not matter
-		"at2": Attendee{language: "perl", Person: Person{Name:"Katerina", Age:21} },		
+		"at2": Attendee{language: knownLanguages[2], Person: Person{Name: "Katerina", Age: 21}},
 	}
 
 	// Always do error checking after the function calling
 	ret, err := scan(attendees, checkForLanguage)
-	if err != nil {
+	if /* FILL: error checking */ {
 		fmt.Println("Error:", err)
 		return
 	}
 	fmt.Println("Ret:", ret)
 }
 
+
+func stringInSlice(a string, list []string) bool {
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
+}

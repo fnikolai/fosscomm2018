@@ -5,7 +5,7 @@ import (
 )
 
 // START OMIT
-type Sounder interface {
+type Sounder interface { // HL
 	Sound() string
 }
 
@@ -21,7 +21,7 @@ func AnimalSound(s Sounder) string {
 
 func main() {
 	d := Dog{}
-	fmt.Println(AnimalSound(d))
+	fmt.Println(AnimalSound(d)) // HL
 }
 
 // END OMIT

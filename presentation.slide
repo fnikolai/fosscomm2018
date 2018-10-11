@@ -10,6 +10,7 @@ Golang Workshop, Fosscomm Oct/2018
 
 
 - Credits:
+[[manos.ikarios@gmail.com][Manos Ikarios]]
 [[http://github.com/baijum/presentation/golang_workshop][Baiju Muthukadan]]
 [[http://www.slideshare.net/spf13/go-firstapp][Steven Francia]]
 
@@ -64,7 +65,7 @@ Golang Workshop, Fosscomm Oct/2018
 
 
 * Amdahls' law is raising
-- Performance upper bound hen a fixed workload is moved to a more parallel environment
+- Performance upper bound when a fixed workload is moved to a more parallel environment
 
 .image image/amdahls.png 400 _
 
@@ -119,19 +120,11 @@ Golang Workshop, Fosscomm Oct/2018
 
 * Hello, Workshopers !
 - Go programs are made up of *packages*: code organization, faster compilation 
-- Initialization logic for package goes into *init* function
-- *Uppercase* denote name visibility 
-    package main
-
-    import "fmt"
-
-    init(){}
-
-    func main(){
-        fmt.Println("Hello, People")
-    }
+.play code/hello.go
 
 - To play with Go programming online: [[http://play.golang.org]]
+- The presentation tool is written in GO
+- The code snippets are linked to GO playground
 
 * Keywords
 
@@ -179,34 +172,39 @@ complex64, complex128
 * Variables
 
 - Type and initialization valures are explicitly specified
-        var year int = 2018
+        var presenter bool = true
         var name, place string = "Fotis", "Fosscomm"
 
 - Type is inferred from the values that is given for initialization
-	    var place = "fosscomm2018"          // string
-	    var name, presenter = "Fotis", true // string, bool
+	    var place, name, presenter = "fosscomm2018", "Fotis", true // string, string, bool
 
-
-- Short variable declaration inside functions 
-.play code/variable4.go /START OMIT/,/END OMIT/
-
-
+- Inside a function, the _:=_ short assignment statement can be used instead of _var_
+	    place, name, presenter :=  "fosscomm2018","Fotis", true    // string, string, bool
 
 - The default value is 0 for numbers, false for Boolean, empy string for strings
-- Naming convention is *CamelCaseNotation*
+
+* Variables 
+
+- C syntax
+        int random_number;
+        int *pointer_to_number;
+        int array_of_random_numbers[3];
+
+        int main(int argc, char *argv[]) 
+        int (*)(int a, int b);
+        int (*)(int (*)(int, int), int)
+        int (*(*)(int (*)(int, int), int))(int, int)
 
 
-* Constants
+- Go syntax (no semicolons, *camelCase* naming, *UpperCase* denote visibility)
+        randomNumber int                        // not visible outside the package
+        pointerToRandomNumber *int              // not visisble outside the package
+        ArrayOfRandomNumbers [3]int             // visible outside the package
 
-- Constants are declared like variables, but with the const keyword.
-- Constants can be character, string, Boolean, or numeric values.
-- Constants cannot be declared using the := syntax.
-
-    const Male = true
-    const Pi = 3.14
-    const Name = "Baiju"
-
-- [[https://blog.golang.org/constants]]
+        func main(int, []string) int
+        func(int,int) int,
+        func(func(int,int) int, int) int
+        func(func(int,int) int, int) func(int, int) int
 
 
 * Arrays
@@ -225,12 +223,11 @@ complex64, complex128
 * Slices
 
 - A _slice_ *[]T* points to an _array_ of values of type T
-- The length of slice can vary dynamically. Can be initialized with *make* before use
-- The default value of a slice is _nil_ -> *length* and *capacity* of 0
+- Default value: _nil_. *len()* number of elements. *cap()* size of underlying array
+- *append()* resizes the underlying array and appends a new element to the slice
 
 .play code/slice.go /START OMIT/,/END OMIT/
 
-- Dynamically allocate and append elements with append
 
 - [[http://blog.golang.org/go-slices-usage-and-internals]]
 - [[https://blog.golang.org/slices]]
@@ -300,7 +297,7 @@ type [name] [specification]
         Age  int
     }
 
-    func (p Person) Major() bool {
+    func (p Person) Major() bool { 
         return p.Age >= 18
     }
 
@@ -309,7 +306,7 @@ type [name] [specification]
     // Celsius represent temperature in Celsius (a float64 type)
     type Celsius float64
 
-    func (c Celsius) Freezing() bool {
+    func (c Celsius) Freezing() bool { 
         return c <= 0
     }
 
@@ -339,8 +336,6 @@ A function with multiple returned values:
 .play code/error1.go /START OMIT/,/END OMIT/
 
 - Blank identifier  (*_* ) can be used to ignore return values from function
-- It can also be used as import alias to invoke *init* function without using the package
-
     import "strconv"
     import _ "github.com/lib/pq"
 
@@ -404,8 +399,8 @@ When iterating over a map,  range returns a tuple <key, element>
 
 
 * Challenge ~15 minutes
-- Exercise 0: [[https://play.golang.org/p/RVsLs0HT_ND][https://play.golang.org/p/RVsLs0HT_ND]]
-- [[https://play.golang.org/p/io9jt6Z64Rb][Solution]]
+- Exercise 1: [[https://play.golang.org/p/wey131kXf7N][https://play.golang.org/p/wey131kXf7N]]
+- [[https://play.golang.org/p/Zsz_JIQNN1B][Solution]]
 
 .image image/gopher.png 400 _ 
 
@@ -413,8 +408,7 @@ When iterating over a map,  range returns a tuple <key, element>
 
 * Pointers
 
-- A pointer holds the memory address of a variable.
-- The type *T is a pointer to a T value. Its zero value is _nil_.
+- The type *T is a pointer to a T value. Its default value is _nil_.
 
     var i *int
     var p *Person
@@ -423,8 +417,6 @@ When iterating over a map,  range returns a tuple <key, element>
 
     i := 42
     p = &i
-
-* Pointers ...
 
 - The * operator denotes the pointer's underlying value.
 
@@ -435,47 +427,42 @@ When iterating over a map,  range returns a tuple <key, element>
 
 * Pointers ...
 
-- Unlike C, Go has no pointer arithmetic.
-- No pointer arithmetic, no pointers to unsafe memory.
-
+- Unlike C, Go has no pointer arithmetic, thus no pointers to unsafe memory.
     a := "hello"
     p := &a
     p += 4  // no, you can't
 
-* Pointers ...
-
-.play code/pointer1.go /START OMIT/,/END OMIT/
-
-* Pointers ...
-
-Why pass by reference instead of pass by value?
-
-- Modify the receiver ("read/write" vs "read")
-- Very large struct and a deep copy is expensive
-- Consistency: Let all methods have pointer receivers
-
-* Pointers ...
-
-- Control what you pass to functions.
-- passing values, no side-effects:
-
+- Passing values has no side effects, but requires (deep) copy (large) structs
     func double(x int) {
         x *= 2
     }
 
-- passing pointers: side-effects possible:
-
+- Passing references, side-effects posible (modifies the receiver)
     func double(x *int) {
         *x *= 2
     }
+- Consistency: Let all methods have pointer receivers
+
+
+
 
 * Defer statement
 
-- Ensure a cleanup function is called later
-- To recover from runtime panic
+- Postpones the execution of a function until the surrounding function returns. 
 - Executed in LIFO order
+- Ensure a cleanup function is called later
 
 .play code/defer1.go /START OMIT/,/END OMIT/
+
+
+* Panic / Recovery
+
+- A panic typically means something went unexpectedly wrong, or something that we are not prepared to handle gracefully
+- Recover regains control of a panicking goroutine
+
+.play code/panic.go /START OMIT/,/END OMIT/
+
+- Equivalent to try-catch-finally
 
 * Interface
 
@@ -499,45 +486,55 @@ Why pass by reference instead of pass by value?
 
 .play code/interface1.go /START OMIT/,/END OMIT/
 
-(*Exercise*: 5)
 
-* Concurrency
+* Challenge ~15 minutes
+- Exercise 2: [[https://play.golang.org/p/wey131kXf7N][https://play.golang.org/p/wey131kXf7N]]
+- [[https://play.golang.org/p/Zsz_JIQNN1B][Solution]]
 
-- Goroutines are lightweight threads managed by the Go runtime
+.image image/gopher.png 400 _ 
+
+
+
+* Communicating sequential processes
+
+.image image/csp.png 400 _ 
+
+
+* Goroutines
+
+- Lightweight threads managed by the Go runtime
 - Calling a function with _go_ keyword starts the goroutine
 
 .play code/concurrency1.go /START OMIT/,/END OMIT/
 
+
+* Channels  ...
+
 - Goroutines can communicate to each other via channels (typed conduit)
-
-* Concurrency ...
-
-- You can send and receive values with the channel operator: <-
+- You can send and receive values of type _T_ with the channel operator: <-
 
     ch <- v    // Send v to channel ch.
-    v := <-ch  // Receive from ch, and
-               // assign value to v.
+    v := <-ch  // Receive from ch, and assign value to v.
 
 - The data flows in the direction of the arrow.
-- Channels must be created before use:
+- Channels must be created before use (default value is nil)
 
     ch := make(chan int)
 
-- Sends and receives block until the other side is ready
-- zero value for channel is _nil_
+- Sends and receives block until the other side is ready (bounded)
+- Once a channel has been closed, you cannot send a value on this channel, but you can still receive from the channel.
 
-* Concurrency ...
+* Synchronization via Channels
 
 
 .play code/concurrency2.go /START OMIT/,/END OMIT/
 
-(*Exercise*: 6)
 
-* Concurrency ...
+* Synchronization via Mutexes
 
 .play code/concurrency3.go /START OMIT/,/END OMIT/
 
-* WaitGroup
+* WaitGroup (WG)
 
 - _sync.WaitGroup_ provides a goroutine synchronization mechanism in Golang
 - A WaitGroup waits for a collection of goroutines to finish
@@ -546,15 +543,32 @@ Why pass by reference instead of pass by value?
 - When a goroutine exits, it must call _Done_
 - The main goroutine blocks on _Wait_
 
-* WaitGroup ...
+* Synchronization via WG (single routine)
 
 .play code/concurrency5.go /START OMIT/,/END OMIT/
 
-* WaitGroup ...
+* Synchronization via WG (multi routines)
 
 .play code/concurrency4.go /START OMIT/,/END OMIT/
 
-(*Exercise*: 7)
+- Termination order not guaranteed
+- And should *not* be
+
+
+
+
+* Challenge ~N minutes
+- Exercise 3: [[https://play.golang.org/p/Zsz_JIQNN1B][https://play.golang.org/p/Zsz_JIQNN1B]]
+- [[https://play.golang.org/p/io9jt6Z64Rb][Solution]]
+
+.image image/gopher.png 400 _ 
+
+
+
+
+
+
+
 
 * Go Proverbs
 
@@ -597,159 +611,5 @@ Design the architecture, name the components, document the details.
 Documentation is for users.
 
 Don't panic.
-
-
-
-
-
-
-* Installing Go Compiler on GNU/Linux
-
-- Download Go compiler binary from [[https://golang.org/dl]]
-- Extract it into your home directory (`$HOME/go`)
-- Create directory named `mygo` in your home directory (`$HOME/mygo`)
-- Add the following lines to your `$HOME/.bashrc`
-
-
-    export GOROOT=$HOME/go
-    export PATH=$GOROOT/bin:$PATH
-
-    export GOPATH=$HOME/mygo
-    export PATH=$GOPATH/bin:$PATH
-
-- [[https://golang.org/doc/install][https://golang.org/doc/install]]
-- *Activity*: Run "go help" command and read the output for 1 minute
-
-* Building and Running
-
-- You can run the program using "go run" command: go run hello.go
-- You can also build (compile) and run the binary like this in GNU/Linux:
-
-    go build hello.go
-    ./hello
-
-(The first command produce a binary and second command executes the binary)
-
-* Formatting Code
-
-- Use "go fmt <file.go>" to format Go source file
-- No more debate about formatting!
-- Can integrate with editors like Vim, Emacs etc.
-- *Proverb*: Gofmt's style is no one's favorite, yet gofmt is everyone's favorite.
-
-(*Exercise*: 1)
-
-.image image/gopher5.png
-
-* Cross Compiling
-
-- The "go build" command produce a binary file native to the operating system and the architecture of the CPU (i386, x86_64 etc.)
-- Specify targeted platform using environment variables: GOOS & GOARCH
-- List of environment variables: [[https://golang.org/doc/install/source#environment]]
-- *Activity*: Produce binary for different operating systems and architectures
-
-* Organizing Code
-
-- *$GOPATH* directory is a workspace (sources, packages, and binaries)
-- Three sub-directories under $GOPATH: bin, pkg and src
-- *bin* directory contains executable binaries (add to $PATH)
-- The *src* directory contains the source files.
-- The *pkg* directory contains package objects used by go tool to create the final executable
-- The Go tool understands the layout of a workspace
-
-    mygo
-    |-- bin
-    |-- pkg
-    `-- src
-
-* Organizing Code ...
-
-If you are using GitHub for hosting code, you can create a directory structure under workspace like this:
-
-    src/github.com/<username>/<projectname>
-
-Replace the <username> with your GitHub username or organization name and <projectname> with the name of the project. For example:
-
-    src/github.com/baijum/introduction
-
-(*Note*: When you fork a project in GitHub use "go get" with the upstream location)
-
-* Getting third party packages
-
-- The "go get" command download source repositories and places them in the workspace
-
-    go get github.com/baijum/introduction
-    go get golang.org/x/tools/...
-
-- Repo URL and package path will be same normally (This helps Go tool to fetch)
-
-- To update use "-u" flag
-
-    go get -u github.com/baijum/introduction
-
-- [[https://golang.org/cmd/go/]]
-
-- *Activity*: Run "go get" as given above
-
-* Go Tools
-
-- Run "go help" to see list of available commands
-- Use "go help [command]" for more information about a command
-
-Few commonly used commands:
-
-- build - compile packages and dependencies
-- fmt - run gofmt on package sources
-- get - download and install packages and dependencies
-- install - compile and install packages and dependencies
-- run - compile and run Go program
-- test - test packages
-- version - print Go version
-
-
-
-
-* Go Resources
-- Cheat-sheet [[https://github.com/a8m/go-lang-cheat-sheet]]
-- Official website: [[http://golang.org][http://golang.org]]
-- Official blog: [[http://blog.golang.org][http://blog.golang.org]]
-- Experiment and share Go source code: [[http://play.golang.org][http://play.golang.org]]
-- [[https://gobyexample.com][https://gobyexample.com]]
-- Forum/Mailing List: [[https://groups.google.com/forum/#!forum/golang-nuts][https://groups.google.com/forum/#!forum/golang-nuts]]
-- Subreddit: [[http://www.reddit.com/r/golang][http://www.reddit.com/r/golang]]
-- More: [[http://dave.cheney.net/resources-for-new-go-programmers][http://dave.cheney.net/resources-for-new-go-programmers]]
-
-
-
-
-
-
-
-
-
-* Random 
-- C like syntax (no semicolons)
-- Object Oriented (Composition over inheritance - no classes!)
-- Fast build (in seconds)
-- Unused imports and variables raise compile error
-
-- No exceptions ([[https://blog.golang.org/errors-are-values][Errors are values]])
-- Pointers (No pointer arithmetic!)
-
-
-* Command line arguments
-
-- *os.Args* (slice) provides access to raw command-line arguments
-- The arguments can be accessed using slice index syntax:
-
-    os.Args[1]
-
-- Go provides a *flag* package supporting basic command-line flag parsing
-
-(*Exercise*: 2)
-
-* Why capacity?
-
-.play code/cap1.go /START OMIT/,/END OMIT/
 
 

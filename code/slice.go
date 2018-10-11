@@ -4,16 +4,16 @@ import "fmt"
 
 func main() {
 	// START OMIT
-	var x []int
+	var x []int // Empty slice
 	fmt.Println(x, len(x), cap(x))
 
-	y := []int{153, 146, 167, 170}
+	x = append(x, 153, 146, 167, 170) // Resize and append // HL
+	fmt.Println(x, len(x), cap(x))
+
+	y := make([]int, 10, 20)       // Allocated slice (cap == 20)	// HL
+	fmt.Println(y, len(y), cap(y)) // In use elements (len == 10)
+
+	y = append(y, 153, 146, 167, 170) // Make a guess ...
 	fmt.Println(y, len(y), cap(y))
-
-	z := make([]int, 10)
-	fmt.Println(z, len(z), cap(z))
-
-	k := make([]int, 10, 20)
-	fmt.Println(k, len(k), cap(k))
 	// END OMIT
 }

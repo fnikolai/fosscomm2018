@@ -13,7 +13,6 @@ func main() {
 		Person
 		Nationality string
 	}{Person{"Austin Powers", "Mike Myers"}, "British"}
-
-	fmt.Printf("%v\n", archenemy)
+	fmt.Println(archenemy)
 	// END OMIT
 }

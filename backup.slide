@@ -1,0 +1,185 @@
+
+
+
+
+
+
+* Installing Go Compiler on GNU/Linux
+
+- Download Go compiler binary from [[https://golang.org/dl]]
+- Extract it into your home directory (`$HOME/go`)
+- Create directory named `mygo` in your home directory (`$HOME/mygo`)
+- Add the following lines to your `$HOME/.bashrc`
+
+
+    export GOROOT=$HOME/go
+    export PATH=$GOROOT/bin:$PATH
+
+    export GOPATH=$HOME/mygo
+    export PATH=$GOPATH/bin:$PATH
+
+- [[https://golang.org/doc/install][https://golang.org/doc/install]]
+- *Activity*: Run "go help" command and read the output for 1 minute
+
+* Building and Running
+
+- You can run the program using "go run" command: go run hello.go
+- You can also build (compile) and run the binary like this in GNU/Linux:
+
+    go build hello.go
+    ./hello
+
+(The first command produce a binary and second command executes the binary)
+
+* Formatting Code
+
+- Use "go fmt <file.go>" to format Go source file
+- No more debate about formatting!
+- Can integrate with editors like Vim, Emacs etc.
+- *Proverb*: Gofmt's style is no one's favorite, yet gofmt is everyone's favorite.
+
+(*Exercise*: 1)
+
+.image image/gopher5.png
+
+* Cross Compiling
+
+- The "go build" command produce a binary file native to the operating system and the architecture of the CPU (i386, x86_64 etc.)
+- Specify targeted platform using environment variables: GOOS & GOARCH
+- List of environment variables: [[https://golang.org/doc/install/source#environment]]
+- *Activity*: Produce binary for different operating systems and architectures
+
+* Organizing Code
+
+- *$GOPATH* directory is a workspace (sources, packages, and binaries)
+- Three sub-directories under $GOPATH: bin, pkg and src
+- *bin* directory contains executable binaries (add to $PATH)
+- The *src* directory contains the source files.
+- The *pkg* directory contains package objects used by go tool to create the final executable
+- The Go tool understands the layout of a workspace
+
+    mygo
+    |-- bin
+    |-- pkg
+    `-- src
+
+* Organizing Code ...
+
+If you are using GitHub for hosting code, you can create a directory structure under workspace like this:
+
+    src/github.com/<username>/<projectname>
+
+Replace the <username> with your GitHub username or organization name and <projectname> with the name of the project. For example:
+
+    src/github.com/baijum/introduction
+
+(*Note*: When you fork a project in GitHub use "go get" with the upstream location)
+
+* Getting third party packages
+
+- The "go get" command download source repositories and places them in the workspace
+
+    go get github.com/baijum/introduction
+    go get golang.org/x/tools/...
+
+- Repo URL and package path will be same normally (This helps Go tool to fetch)
+
+- To update use "-u" flag
+
+    go get -u github.com/baijum/introduction
+
+- [[https://golang.org/cmd/go/]]
+
+- *Activity*: Run "go get" as given above
+
+* Go Tools
+
+- Run "go help" to see list of available commands
+- Use "go help [command]" for more information about a command
+
+Few commonly used commands:
+
+- build - compile packages and dependencies
+- fmt - run gofmt on package sources
+- get - download and install packages and dependencies
+- install - compile and install packages and dependencies
+- run - compile and run Go program
+- test - test packages
+- version - print Go version
+
+
+
+
+* Go Resources
+- Cheat-sheet [[https://github.com/a8m/go-lang-cheat-sheet]]
+- Official website: [[http://golang.org][http://golang.org]]
+- Official blog: [[http://blog.golang.org][http://blog.golang.org]]
+- Experiment and share Go source code: [[http://play.golang.org][http://play.golang.org]]
+- [[https://gobyexample.com][https://gobyexample.com]]
+- Forum/Mailing List: [[https://groups.google.com/forum/#!forum/golang-nuts][https://groups.google.com/forum/#!forum/golang-nuts]]
+- Subreddit: [[http://www.reddit.com/r/golang][http://www.reddit.com/r/golang]]
+- More: [[http://dave.cheney.net/resources-for-new-go-programmers][http://dave.cheney.net/resources-for-new-go-programmers]]
+
+
+
+
+
+
+
+
+
+* Random 
+- C like syntax (no semicolons)
+- Object Oriented (Composition over inheritance - no classes!)
+- Fast build (in seconds)
+- Unused imports and variables raise compile error
+
+- No exceptions ([[https://blog.golang.org/errors-are-values][Errors are values]])
+- Pointers (No pointer arithmetic!)
+
+
+* Command line arguments
+
+- *os.Args* (slice) provides access to raw command-line arguments
+- The arguments can be accessed using slice index syntax:
+
+    os.Args[1]
+
+- Go provides a *flag* package supporting basic command-line flag parsing
+
+(*Exercise*: 2)
+
+* Why capacity?
+
+.play code/cap1.go /START OMIT/,/END OMIT/
+
+
+
+* Constants
+
+- Constants are declared like variables, but with the const keyword.
+- Constants can be character, string, Boolean, or numeric values.
+- Constants cannot be declared using the := syntax.
+
+    const Male = true
+    const Pi = 3.14
+    const Name = "Baiju"
+
+- [[https://blog.golang.org/constants]]
+
+
+* Packages
+- Initialization logic for package goes into *init* function
+    init(){}
+
+
+
+package main
+
+import "fmt"
+
+init(){}
+
+func main(){
+        fmt.Println("Hello, People")
+}
