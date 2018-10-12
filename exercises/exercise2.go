@@ -63,25 +63,9 @@ type gentleman struct {
 	lingua string
 }
 
-func (g gentleman) Name() string {
-	return g.name
-}
-
-func (g gentleman) KnowsPerl() bool {
-	return g.lingua == "perl"
-}
-
-func (g gentleman) KnowsPython() bool {
-	return g.lingua == "python"
-}
-
-func (g gentleman) KnowsC() bool {
-	return g.lingua == "c"
-}
-
 /*
-* Lady ... gentleman ... does not matter what is the struct as long
-* as it implements the specific set of methods
+* FILL: For a gentleman to be an Attendee, he must
+* fulfill certain criteria. What are those criteria ?
  */
 type Attendee interface {
 	Name() string
@@ -90,17 +74,25 @@ type Attendee interface {
 	KnowsC() bool
 }
 
-func scan(attendees map[string]Attendee, language string) (knowers []string, err error) {
+func scan(attendees map[string]Attendee, language string) ([]string, error) {
 	if attendees == nil {
 		return nil, errors.New("NIL map was given")
 	}
+
+	// Declare a slice
+	var knowers []string
 
 	defer func() {
 		msg := recover()
 		if msg != nil {
 			fmt.Println("Recover from panic errror:", msg)
-			knowers = nil
-			err = errors.New(msg.(string))
+
+			/*
+			* FILL: defer postpones the execution of the anonymous function until
+			* the surrounding function returns
+			* ... What should be the returned of scan function ?
+			* ... What kind of housekeeping cleanup should be implemented here ?
+			 */
 		}
 	}()
 
@@ -136,7 +128,9 @@ func scan(attendees map[string]Attendee, language string) (knowers []string, err
 func main() {
 	fmt.Println("Hello, playground")
 
-	// Evaluate arguments on the entrace, calls function on the exit
+	// Just a candy ... a fancy way to measure performance
+	// defer evaluates the arguments on entrace, but calls
+	// the function when main exits.
 	defer timeTrack(time.Now(), "Scanning")
 
 	ret, err := scan(attendees, checkForLanguage)

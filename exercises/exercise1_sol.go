@@ -44,7 +44,7 @@ func (a Attendee) KnowsC() bool {
 	return a.language == "c"
 }
 
-func scan(attendees map[string]Attendee, language string) (ret []string, err error) {
+func scan(attendees map[string]Attendee, language string) ([]string, error) {
 	// error is a value
 	if attendees == nil {
 		return nil, errors.New("NIL map was given")

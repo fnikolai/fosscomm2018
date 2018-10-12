@@ -16,15 +16,19 @@ Golang Workshop, Fosscomm Oct/2018
 
 
 * Fotis Nikolaidis 
-- Contact
-    nikolaidis.fotis@gmail.com
-- Experience
-    ~3 years @ French Alternative Energies and Atomic Energy Commission (CEA/DAM/DIF)
-    ~3 years @ European Organization for Nuclear Research (IT-DSS-TAB, LHCb)
-    ~3 years @ Foundation of Research and Technology (CARV, TNL)
+Contact
 
-- Others
-    Receiver of ~3 years Marie Curie Grant (BigStorage ITN)
+    nikolaidis.fotis@gmail.com
+
+Experience
+
+- ~3 years @ French Alternative Energies and Atomic Energy Commission (CEA/DAM/DIF)
+- ~3 years @ European Organization for Nuclear Research (IT-DSS-TAB, LHCb)
+- ~3 years @ Foundation of Research and Technology (CARV, TNL)
+
+Others
+
+- Receiver of ~3 years Marie Curie Grant (BigStorage ITN)
 
 
 * Ground Rules
@@ -60,28 +64,32 @@ Golang Workshop, Fosscomm Oct/2018
 
 
 * Moore's law is failing
-- The number of transistors on a chip doubles every year while the costs are halved
+The number of transistors on a chip doubles every year while the costs are halved
+
 .image image/moores.png 400 _
 
 
 * Amdahls' law is raising
-- Performance upper bound when a fixed workload is moved to a more parallel environment
+Performance upper bound when a fixed workload is moved to a more parallel environment
 
 .image image/amdahls.png 400 _
 
 
 * Facts
 
-- Larges codebase
+Larges codebase
+
     - Reusable code:                if exists, use it
     - Minimal boilerplate code:     avoid lines that would not exist in pseudocode
     - Minimal side effects:         one component do not accidently interfer with another
 
-- Thousands of developers
+Thousands of developers
+
     - Simple language:              rapid productivity
     - Formal verification:          ensure that a component does what it claims to do    
 
-- Diverse backgrounds
+Diverse backgrounds
+
     - Clean code:                   if something similar exists, modify it
     - Language ecosystem:           standardize set of tools
 
@@ -119,7 +127,8 @@ Golang Workshop, Fosscomm Oct/2018
 
 
 * Hello, Workshopers !
-- Go programs are made up of *packages*: code organization, faster compilation 
+Go programs are made up of *packages*: code organization, faster compilation 
+
 .play code/hello.go
 
 - To play with Go programming online: [[http://play.golang.org]]
@@ -128,7 +137,8 @@ Golang Workshop, Fosscomm Oct/2018
 
 * Keywords
 
-- Keywords are reserved words that cannot be used as identifiers
+Keywords are reserved words that cannot be used as identifiers
+
 - Provide structure and meaning to the language
 
 
@@ -138,11 +148,13 @@ Golang Workshop, Fosscomm Oct/2018
     const        fallthrough  if           range        type
     continue     for          import       return       var
 
-- C Style Comments
+C Style Comments
+
     /* This is a multi-line comment
        ... and this is a the second line */
 
-- C++ style Comments
+C++ style Comments
+
     // Single line number
     // Starts with two slashes
 
@@ -171,21 +183,25 @@ complex64, complex128
 
 * Variables
 
-- Type and initialization valures are explicitly specified
+Type and initialization valures are explicitly specified
+
         var presenter bool = true
         var name, place string = "Fotis", "Fosscomm"
 
-- Type is inferred from the values that is given for initialization
+Type is inferred from the values that is given for initialization
+
 	    var place, name, presenter = "fosscomm2018", "Fotis", true // string, string, bool
 
-- Inside a function, the _:=_ short assignment statement can be used instead of _var_
+Inside a function, the _:=_ short assignment statement can be used instead of _var_
+
 	    place, name, presenter :=  "fosscomm2018","Fotis", true    // string, string, bool
 
 - The default value is 0 for numbers, false for Boolean, empy string for strings
 
 * Variables 
 
-- C syntax
+C syntax
+
         int random_number;
         int *pointer_to_number;
         int array_of_random_numbers[3];
@@ -196,7 +212,8 @@ complex64, complex128
         int (*(*)(int (*)(int, int), int))(int, int)
 
 
-- Go syntax (no semicolons, *camelCase* naming, *UpperCase* denote visibility)
+Go syntax (no semicolons, *camelCase* naming, *UpperCase* denote visibility)
+
         randomNumber int                        // not visible outside the package
         pointerToRandomNumber *int              // not visisble outside the package
         ArrayOfRandomNumbers [3]int             // visible outside the package
@@ -209,9 +226,13 @@ complex64, complex128
 
 * Arrays
 
-- An ordered container type with a fixed number of data
+An ordered container type with a fixed number of data
+
 - The type *[n]T* is an array of n values of type T
-- An array's length is part of its type, so arrays cannot be re-sized.
+- Default value is nil
+
+An array's length is part of its type, so arrays cannot be re-sized.
+
 - if the length is different for two arrays, those are distinct incompatible types
 
     heights := [4]int{153, 146, 167, 170}
@@ -222,21 +243,23 @@ complex64, complex128
 
 * Slices
 
-- A _slice_ *[]T* points to an _array_ of values of type T
-- Default value: _nil_. *len()* number of elements. *cap()* size of underlying array
+A [[https://blog.golang.org/slices][slice]] *[]T* points to an _array_ of values of type T
+
+- *len()* number of elements. *cap()* size of underlying array
 - *append()* resizes the underlying array and appends a new element to the slice
 
 .play code/slice.go /START OMIT/,/END OMIT/
 
 
 - [[http://blog.golang.org/go-slices-usage-and-internals]]
-- [[https://blog.golang.org/slices]]
-
 
 
 * Maps
 
-- A *map* maps keys to values. Can be allocated at declaration time
+A [[https://blog.golang.org/go-maps-in-action][map]] maps keys to values
+
+- Can be allocated at declaration time
+
     fruitWeights := map[string]int{
         "Apple":  45,
         "Mango":  24,
@@ -248,49 +271,54 @@ complex64, complex128
 .play code/maps.go /START OMIT/,/END OMIT/
 
 - Assignment to *nil* map is provibited
-- [[https://blog.golang.org/go-maps-in-action]]
-
 
 
 * Type declarations
 
-type [name] [specification]
 
-- Custom types can be constructed based on built-in primitives
+Custom types can be constructed based on built-in primitives
+
     // Celsius represent temperature in Celsius (a float64 type)
     type Celsius float64
 
     // Names represent an array of strings with length as 5
     type Names [5]string
 
-- Or from composite structs (a collection of fields)
+Or from composite structs (a collection of fields)
+
     // composite structs
     type Person struct {
         Name string
         Age  int
     }
 
+- type [name] [specification]
+
 * Struct Declaration
 
-- Declare before usage
+Declare before usage
+
 	var me Person
 	me.Name = "Douglas Powers"
 	me.Actor = "Mike Myers"
 
-- Declare and initialize
+Declare and initialize
+
 	minime := Person{
 		Name:  "Doublas Powers Jr.",
 		Actor: "Mike Myers",
 	}
 
-- Composition over inheritance 
+Composition over inheritance 
+
 .play code/struct1.go /START OMIT/,/END OMIT/
 
 
 
 * Method declaration
 
-- Method is a function bound to a type (receiver) declared in the same package.
+Method is a function bound to a type (receiver) declared in the same package.
+
 - Method bound to a struct:
     type Person struct {
         Name string
@@ -314,24 +342,27 @@ type [name] [specification]
 
 * Function declaration
 
-** func [name] ([params]) [return value]
+Functions are like methods
 
-A function to return sum of two _int_ values:
+- Can return multiple values 
+- func (reveiver) Method == func Method(receiver)
 
-.play code/functiondeclaration1.go /START OMIT/,/END OMIT/
+Functions are not like methods
 
-
-** func [name] ([params]) ([return values])
-
-A function with multiple returned values:
+- Are stateless and can be used by multiple types
 
 .play code/functiondeclaration2.go /START OMIT/,/END OMIT/
 
 
+- Wait for interfaces ....
+
+
 * Errors
 
-- Functions often return an built-in [[https://blog.golang.org/errors-are-values][error value]]. Nil error denotes success
+Functions often return an built-in [[https://blog.golang.org/errors-are-values][error value]]. 
+
 - Calling code must handle the error or the compilation will fail
+- Nil error denotes success
 
 .play code/error1.go /START OMIT/,/END OMIT/
 
@@ -344,7 +375,7 @@ A function with multiple returned values:
 
 * If Conditions
 
-- Syntax inspired by C. Curly brace is mandatory
+Syntax inspired by C. Curly brace is mandatory
 
 .play code/if1.go /START OMIT/,/END OMIT/
 
@@ -399,45 +430,28 @@ When iterating over a map,  range returns a tuple <key, element>
 
 
 * Challenge ~15 minutes
-- Exercise 1: [[https://play.golang.org/p/wey131kXf7N][https://play.golang.org/p/wey131kXf7N]]
-- [[https://play.golang.org/p/Zsz_JIQNN1B][Solution]]
+- Exercise 1: [[https://play.golang.org/p/wNTsf0-NE1b][https://play.golang.org/p/wNTsf0-NE1b]]
+- [[https://play.golang.org/p/XXqIbGRvev2][Solution]]
 
 .image image/gopher.png 400 _ 
 
 
-
-* Pointers
-
-- The type *T is a pointer to a T value. Its default value is _nil_.
-
-    var i *int
-    var p *Person
-
-- The & operator generates a pointer to its operand.
-
-    i := 42
-    p = &i
-
-- The * operator denotes the pointer's underlying value.
-
-    fmt.Println(*p) // read i through the pointer p
-    *p = 21         // set i through the pointer p
-
-- This is known as "dereferencing" or "indirecting".
-
 * Pointers ...
 
-- Unlike C, Go has no pointer arithmetic, thus no pointers to unsafe memory.
+Unlike C, Go has no pointer arithmetic, thus no pointers to unsafe memory.
+
     a := "hello"
     p := &a
     p += 4  // no, you can't
 
-- Passing values has no side effects, but requires (deep) copy (large) structs
+Passing values has no side effects, but requires (deep) copy (large) structs
+
     func double(x int) {
         x *= 2
     }
 
-- Passing references, side-effects posible (modifies the receiver)
+Passing references, side-effects posible (modifies the receiver)
+
     func double(x *int) {
         *x *= 2
     }
@@ -448,7 +462,8 @@ When iterating over a map,  range returns a tuple <key, element>
 
 * Defer statement
 
-- Postpones the execution of a function until the surrounding function returns. 
+Postpones the execution of a function until the surrounding function returns. 
+
 - Executed in LIFO order
 - Ensure a cleanup function is called later
 
@@ -457,30 +472,31 @@ When iterating over a map,  range returns a tuple <key, element>
 
 * Panic / Recovery
 
-- A panic typically means something went unexpectedly wrong, or something that we are not prepared to handle gracefully
+A panic typically means something went unexpectedly wrong, or something that we are not prepared to handle gracefully
+
 - Recover regains control of a panicking goroutine
+- Equivalent to try-catch-finally
 
 .play code/panic.go /START OMIT/,/END OMIT/
 
-- Equivalent to try-catch-finally
 
 * Interface
 
-- Interfaces provide a way to specify the behavior of an object
+An interface type is a Namd collecction of method signatures 
+
+- A value of interface type can hold any value that implements those methods
+- Interfaces are satisfied implicitly
+- A type implements an interface by implementing the methods.
 - A type can implement multiple interfaces
-- Named collections of method signatures
 
     type Geometry interface {
         Area() float64
         Perimeter() float64
     }
 
-* Interface ...
-
-- An interface type is defined by a set of methods
-- A value of interface type can hold any value that implements those methods
-- Interfaces are satisfied implicitly
-- A type implements an interface by implementing the methods.
+- Convert back to underlying type (if needed, reconsider your design)
+    
+    square := shape.(squareType)
 
 * Interface ...
 
@@ -488,21 +504,45 @@ When iterating over a map,  range returns a tuple <key, element>
 
 
 * Challenge ~15 minutes
-- Exercise 2: [[https://play.golang.org/p/wey131kXf7N][https://play.golang.org/p/wey131kXf7N]]
-- [[https://play.golang.org/p/Zsz_JIQNN1B][Solution]]
+- Exercise 2: [[https://play.golang.org/p/3NGw1KSXZ0W][https://play.golang.org/p/3NGw1KSXZ0W]]
+- [[https://play.golang.org/p/An_4PyBVa4W][Solution]]
 
 .image image/gopher.png 400 _ 
 
 
+* Concurrency is NOT parallelism 
+
+Concurrency:  Programming as the composition of independently executing processes. 
+        
+        Concurrency is about dealing with lots of things at once. 
+
+Parallelism:  Programming as the simultaneous execution of (possibly related) computations. 
+        
+        Parallelism is about doing lots of things at once.
+
+
+- Concurrency is about structure, parallelism is about execution.
+- Concurrency provides a way to structure a solution to solve a problem that may (but not necessarily) be parallelizable. 
+
+- Go concurrency model and (like Erlang and others) is based on CSP
+    
+    C. A. R. Hoare: Communicating Sequential Processes (CACM 1978) 
 
 * Communicating sequential processes
 
-.image image/csp.png 400 _ 
+.image image/csp.png 350 _ 
+
+
+- concurrent execution (goroutines)
+- synchronization and messaging (channels)
+- multi-way concurrent control (select)
+
 
 
 * Goroutines
 
-- Lightweight threads managed by the Go runtime
+Lightweight threads managed by the Go runtime
+
 - Calling a function with _go_ keyword starts the goroutine
 
 .play code/concurrency1.go /START OMIT/,/END OMIT/
@@ -510,14 +550,15 @@ When iterating over a map,  range returns a tuple <key, element>
 
 * Channels  ...
 
-- Goroutines can communicate to each other via channels (typed conduit)
+Goroutines communicate to each other via channels (typed conduit)
+
 - You can send and receive values of type _T_ with the channel operator: <-
+- The data flows in the direction of the arrow.
 
     ch <- v    // Send v to channel ch.
     v := <-ch  // Receive from ch, and assign value to v.
 
-- The data flows in the direction of the arrow.
-- Channels must be created before use (default value is nil)
+Channels must be created before use (default value is nil)
 
     ch := make(chan int)
 
@@ -536,7 +577,8 @@ When iterating over a map,  range returns a tuple <key, element>
 
 * WaitGroup (WG)
 
-- _sync.WaitGroup_ provides a goroutine synchronization mechanism in Golang
+_sync.WaitGroup_ provides a goroutine synchronization mechanism in Golang
+
 - A WaitGroup waits for a collection of goroutines to finish
 - _sync.WaitGroup_ provides 3 methods: Add, Done and Wait.
 - _Add_ method is used to identify how many goroutines need to be waited
@@ -558,15 +600,10 @@ When iterating over a map,  range returns a tuple <key, element>
 
 
 * Challenge ~N minutes
-- Exercise 3: [[https://play.golang.org/p/Zsz_JIQNN1B][https://play.golang.org/p/Zsz_JIQNN1B]]
-- [[https://play.golang.org/p/io9jt6Z64Rb][Solution]]
+- Exercise 3: [[https://play.golang.org/p/LcbrgeTxI6S][https://play.golang.org/p/LcbrgeTxI6S]]
+- [[https://play.golang.org/p/xbX8tEBBeWK][Solution]]
 
 .image image/gopher.png 400 _ 
-
-
-
-
-
 
 
 

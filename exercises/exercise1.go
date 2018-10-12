@@ -44,10 +44,6 @@ func scan(attendees map[string]Attendee, language string) ([]string, error) {
 		return nil, errors.New("NIL map was given")
 	}
 
-	if !stringInSlice(language, knownLanguages) {
-		return nil, errors.New("invalid language")
-	}
-
 
 	// Declare a slice 
 	var knowers []string
@@ -108,12 +104,3 @@ func main() {
 	fmt.Println("Ret:", ret)
 }
 
-
-func stringInSlice(a string, list []string) bool {
-	for _, b := range list {
-		if b == a {
-			return true
-		}
-	}
-	return false
-}
