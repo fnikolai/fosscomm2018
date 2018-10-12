@@ -4,11 +4,12 @@ import "fmt"
 
 func main() {
 	// START OMIT
-	if money := 20000; money > 15000 { // HL
-		fmt.Println("I am going to buy a car.")
+	b, c := 10, 31
+	if mean := b + c; mean < 42 {
+		fmt.Println("if:", mean)
 	} else {
-		fmt.Println("I am going to buy a bike.")
+		fmt.Println("else:", mean-42)
 	}
-	// can't use the variable `money` here
+	fmt.Println("outside:", mean)
 	// END OMIT
 }

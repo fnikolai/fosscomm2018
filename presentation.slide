@@ -1,38 +1,21 @@
 #+theme=black
-
 Hey Ho Let's GO
-
 Golang Workshop, Fosscomm Oct/2018
 
+Fotis Nikolaidis
+- email:      nikolaidis.fotis@gmail.com
+- git:        http://github.com/fnikolai
+- linkedin:   https://www.linkedin.com/in/fotis-nikolaidis-444a6634
 
-- Presenter: Fotis Nikolaidis
 
 Credits:
-Manos Ikarios
+[[manos.ikarios@gmail.com][Manos Ikarios]]
 [[http://github.com/baijum/presentation/golang_workshop][Baiju Muthukadan]]
-[[http://www.slideshare.net/spf13/go-firstapp][Steven Francia]]
-
-
-* Fotis Nikolaidis 
-Contact
-
-    email:      nikolaidis.fotis@gmail.com
-    git:        http://github.com/fnikolai
-    linkedin:   https://www.linkedin.com/in/fotis-nikolaidis-444a6634
-
-Experience
-
-    ~3 years @ French Alternative Energies and Atomic Energy Commission (CEA/DAM/DIF)
-    ~3 years @ European Organization for Nuclear Research (IT-DSS-TAB, LHCb)
-    ~3 years @ Foundation of Research and Technology (CARV, TNL)
-
-Others
-
-    Receiver of ~3 years Marie Curie Grant (BigStorage ITN)
 
 
 * Ground Rules
 
+- Experience in some other programming language (Perl, Python, C, C++, Java,..)
 - Workshops are hard, everyone works at a different pace
 - We will move on when most of the people are ready
 - Slides are online, feel free to work ahead or catch up
@@ -40,24 +23,17 @@ Others
 
 .image image/gopher.png 250 _ 
 
-* Requirements
-- Experience in some other programming language (Perl, Python, C, C++, Java,..)
-- Laptop with Internet connection
-- Operating system with Go support (GNU/Linux or Mac OS or Windows)
-- Know how to use [[http://git-scm.com/doc][Git version control system]]
-- Comfortable with one shell (Bash, Zsh, PowerShell etc.)
-
 
 * Agenda
 
 - General facts and Reasons to use GO
 - Data structures (primitives, arrays, maps, structs, ...)
 - Control structures (functions, if, switch, ...)
-- Exercise 1
+- Exercise 1 (Rooky)
 - Defered execution, panic/recover, interfaces, 
-- Exercise 2
-- Concurrency 
-- Exercise 3
+- Exercise 2 (Veteran)
+- Concurrent programming
+- Exercise 3 (Captain Chief)
 - Lunch
 
 
@@ -67,20 +43,26 @@ The number of transistors on a chip doubles every year while the costs are halve
 
 .image image/moores.png 400 _
 
+- Processes used to run pseudo-parallely on a single core. Not any more 
 
 * Amdahls' law is raising
 Performance upper bound when a fixed workload is moved to a more parallel environment
 
 .image image/amdahls.png 400 _
 
+- Pseudo-parallel process used to communicate through shared memory. Not any more
 
 * Facts
+
+Step beyond monolithic applications 
+
+    - Coordinate processes          holy grail since '60s
+    - Minimal side effects:         components do not interfere accidently with another
 
 Larges codebase
 
     - Reusable code:                if it exists, use it
     - Minimal boilerplate code:     avoid lines that would not exist in pseudocode
-    - Minimal side effects:         components do not interfere accidently with another
 
 Thousands of developers
 
@@ -98,16 +80,23 @@ Diverse backgrounds
 - Type-safe, memory-safe, with garbage collection and Built-in concurrency (CSP-style)
 - [[http://commandcenter.blogspot.in/2012/06/less-is-exponentially-more.html][Simplicity]], 25 keywords (less than C,C++,Python etc.)
 
-.image image/go2.png _ 500
+.image image/go2.png _ 400
 
-* What is GO ? ..
 
-- Two major compilers: gc & gccgo
-- Operating Systems: Windows, GNU/Linux, Mac OS X, *BSD etc.
-- Cross compilation on CPU Architectures: amd64, 386, arm etc.
-- Targets to be fast both at compile time and runtime
 
-.image image/go1.png _ 500
+* Go in a Nutshell
+
+- Statically typed
+- Syntax similar to Java/C/C++, but less parentheses and no semicolons
+- Compiles to native code (no JVM)
+- No classes, but structs with methods
+- Interfaces
+- No implementation inheritance. There's type embedding, though.
+- Functions are first class citizens
+- Functions can return multiple values
+- Has closures
+- Pointers, but not pointer arithmetic
+- Built-in concurrency primitives: Goroutines and Channels
 
 
 * Who uses Go?
@@ -128,11 +117,12 @@ Diverse backgrounds
 * Hello, Workshopers !
 Go programs are made up of *packages*: code organization, faster compilation 
 
+- Executables are in package *main*
+
 .play code/hello.go
 
 - To play with Go programming online: [[http://play.golang.org]]
 - The presentation tool is written in GO
-- The code snippets are linked to GO playground
 
 * Keywords
 
@@ -180,24 +170,49 @@ complex64, complex128
 
 - [[https://golang.org/pkg/fmt]]
 
-* Variables
+* Variable Declaration
 
-Type and initialization valures are explicitly specified
 
-        var presenter bool = true
-        var name, place string = "Fotis", "Fosscomm"
+Type goes after identifier
 
-Type is inferred from the value that is given for initialization
+    var foo int                 // declaration without initialization
+    var foo int = 42            // declaration with initialization
+    var foo, bar int = 42, 1302 // declare/init multiple vars at once
+    var foo = 42                // type omitted, will be inferred
+    foo := 42                   // shorthand, only in func bodies, implicit type
+    const constant = "This is a constant
 
-	    var place, name, presenter = "fosscomm2018", "Fotis", true // string, string, bool
+- Types can be converted from one to another
+    
+    i := 42             // Integer
+    f := float64(i)     // Float64
+    u := uint(f)        // Back to unsigned integer
 
-Inside a function, the _:=_ short assignment statement can be used instead of _var_
 
-	    place, name, presenter :=  "fosscomm2018","Fotis", true    // string, string, bool
+- *camelCase* naming convention
+- *UpperCase* identifier: exported (visible from other packages)
+- *lowerCase* identifier: private (not visible from other packages)
 
-- The default value is 0 for numbers, false for Boolean, empy string for strings
 
-* Variables 
+
+* Function Declaration
+    func functionName(param1 string, param2 int) {} // parameters of different type
+    func functionName(param1, param2 int) {}        // parameters of same type
+    func functionName(params  ...int) {}            // variadic parameters
+
+
+Return values go after function declaration 
+
+    func functionName() string                      // Return single value
+    func functionName() (ret0 string)               // Return named value
+    func functionName() (ret0 string, ret1 int)     // Return multiple named values
+
+Can be used as values and as closures
+
+.play code/functiondeclaration2.go /START OMIT/,/END OMIT/
+
+
+* Why the strange syntax ?
 
 C syntax
 
@@ -205,13 +220,13 @@ C syntax
         int *pointer_to_number;
         int array_of_random_numbers[3];
 
-        int main(int argc, char *argv[]) 
+        int main(int argc, char *argv[]);
         int (*)(int a, int b);
-        int (*)(int (*)(int, int), int)
-        int (*(*)(int (*)(int, int), int))(int, int)
+        int (*)(int (*)(int, int), int);
+        int (*(*)(int (*)(int, int), int))(int, int);
 
 
-Go syntax (no semicolons, *camelCase* naming, *UpperCase* denote visibility)
+Go syntax 
 
         randomNumber int                        // not visible outside the package
         pointerToRandomNumber *int              // not visible outside the package
@@ -271,105 +286,42 @@ A [[https://blog.golang.org/go-maps-in-action][map]] maps keys to values
 
 - Assignment to *nil* map is provibited
 
+* For Loop
 
-* Type declarations
+It can be only _for_. No _while_, no _until_
 
+- Syntax inspired by C. Curly brace is mandatory.
+- No parenthesis (not even optional)
 
-Custom types can be constructed based on built-in primitives
+    for i := 1; i < 10; i++ { }
+    for ; i < 10; {}                // while
+    for i < 10 {}                   // can drop semilicolons
+    for {}                          // while(true) 
 
-    // Celsius represent temperature in Celsius (a float64 type)
-    type Celsius float64
-
-    // Names represent an array of strings with length as 5
-    type Names [5]string
-
-Or from composite structs (a collection of fields)
-
-    // composite structs
-    type Person struct {
-        Name string
-        Age  int
-    }
-
-- type [name] [specification]
-
-* Struct Declaration
-
-Declare before usage
-
-	var me Person
-	me.Name = "Douglas Powers"
-	me.Actor = "Mike Myers"
-
-Declare and initialize
-
-	minime := Person{
-		Name:  "Doublas Powers Jr.",
-		Actor: "Mike Myers",
-	}
-
-Composition over inheritance 
-
-.play code/struct1.go /START OMIT/,/END OMIT/
+- Trivial to loop an array/slice. How would you loop a map ?
+- Difficult for the compiler to prefetch data
 
 
+* Range Iterator
 
-* Method declaration
+Unified way to iterate constructs (e.g., slices, maps, channels, ...)
 
-Method is a function bound to a type (receiver) declared in the same package.
+- loop over an array/a slice returns a tuple <index, element>
+- loop over a map returns a tuple <key, element>
+- Blank identifier  (*_* ) can be used to ignore returned values
 
-- Method bound to a struct:
-    type Person struct {
-        Name string
-        Age  int
-    }
+    a := []{1,2,3,4,5,6,7}      // Declare a slice
 
-    func (p Person) Major() bool { 
-        return p.Age >= 18
-    }
+    for i, e := range a { // i is the index, e the element   }
+    for _, e := range a { // i is ommitted, e is the element }
+    for i := range a    { // i is the index, e is ommitted   }
 
-- Method bound to a custom type named Celsius (float64):
-
-    // Celsius represent temperature in Celsius (a float64 type)
-    type Celsius float64
-
-    func (c Celsius) Freezing() bool { 
-        return c <= 0
+- loop on other constructs
+    for range time.Tick(time.Second) {
+        // do it once a sec
     }
 
 
-
-* Function declaration
-
-Functions are like methods
-
-- Can return multiple values 
-- func (reveiver) Method == func Method(receiver)
-
-Functions are not like methods
-
-- Are stateless and can be used by multiple types
-
-.play code/functiondeclaration2.go /START OMIT/,/END OMIT/
-
-
-- Wait for interfaces ....
-
-
-* Errors
-
-Functions often return an built-in [[https://blog.golang.org/errors-are-values][error value]]. 
-
-- Calling code must handle the error or the compilation will fail
-- Nil error denotes success
-
-.play code/error1.go /START OMIT/,/END OMIT/
-
-- Blank identifier  (*_* ) can be used to ignore return values from function
-    import "strconv"
-    import _ "github.com/lib/pq"
-
-    x, _ := strconv.Atoi()
 
 
 * If Conditions
@@ -379,8 +331,7 @@ Syntax inspired by C. Curly brace is mandatory
 .play code/if1.go /START OMIT/,/END OMIT/
 
 - if statement can start with a short statement before the condition
-- Variables declared by the statement are only in scope until the end of the if
-- Variables declared are also available inside any of the else blocks
+- Variables declared by the statement are only visible within the scope of the statement
 
 .play code/if2.go /START OMIT/,/END OMIT/
 
@@ -390,6 +341,8 @@ Syntax inspired by C. Curly brace is mandatory
 - The cases are evaluated top to bottom until a match is found
 - There is no automatic fall through. Use break for early termination
 - Cases can be presented in comma-separated lists
+- As with for and if, an assignment statement before the  switch value is allowed
+
 
 .play code/switch1.go /START OMIT/,/END OMIT/
 
@@ -401,30 +354,79 @@ If the switch has no expression it switches on true (useful to write an if-else-
 
 
 
-* For Loop
 
-- The only looping construct (no while loop)
-- Syntax inspired by C. Curly brace is mandatory
-- No parenthesis (not even optional)
-
-.play code/for1.go /START OMIT/,/END OMIT/
-
-- Pre and post statements can be empty (and drop the semicolons!)
-
-.play code/for2.go /START OMIT/,/END OMIT/
+* Type declarations
 
 
-* Range Iterator
+*Constrains*: named type of built-in primitives
 
-When iterating over a slice, range returns a tuple <index, element>
+    type Celsius float64
 
-.play code/range1.go /START OMIT/,/END OMIT/
+*Semantics*: signify semantics to the structure
 
-When iterating over a map,  range returns a tuple <key, element>
+    type Dozen [12]string
 
-.play code/range2.go /START OMIT/,/END OMIT/
+*Structs*: Create a named collection of fields 
 
-- Apart from syntantic sugar, _Range_ provides locality optimization 
+    type Person struct {
+        Name string
+        Age  int
+    }
+
+- type [name] [specification]
+
+* Struct Declaration
+
+    // Declaration without Initialization
+    var me Person
+    me.Name = "Douglas Powers"
+    me.Actor = "Mike Myers"         
+
+    // Declaration with Initialization
+    minime := Person{ Name:  "Doublas Powers Jr.", Actor: "Mike Myers"	}
+
+- Anonymous structs
+- Inheritance versus type embedding (composition).
+
+.play code/struct1.go /START OMIT/,/END OMIT/
+
+
+
+* Method declaration
+
+There are no classes, only structs. Struct is a type. Types can have methods.
+
+- Method bound to a Person type (collection of fields):
+    type Person struct {
+        Name string
+        Age  int
+    }
+
+    func (p Person) Major() bool { 
+        return p.Age >= 18
+    }
+
+- Method bound to a Celcius type (single field):
+    type Celsius float64
+
+    func (c Celsius) Freezing() bool { 
+        return c <= 0
+    }
+
+
+* Errors
+
+
+There is no exception handling. Functions that might produce an error just declare an
+additional return value of type [[https://blog.golang.org/errors-are-values][Error]]
+
+- Calling code must handle the error or the compilation will fail
+- Nil error denotes success
+- Blank identifier  (*_* ) can be used to ignore returned values
+
+.play code/error1.go /START OMIT/,/END OMIT/
+
+    
 
 
 
@@ -481,7 +483,7 @@ A panic typically means something went unexpectedly wrong, or something that we 
 
 * Interface
 
-An interface type is a Namd collecction of method signatures 
+An interface type is a collection of method signatures 
 
 - A value of interface type can hold any value that implements those methods
 - Interfaces are satisfied implicitly
@@ -547,7 +549,7 @@ Lightweight threads managed by the Go runtime
 .play code/concurrency1.go /START OMIT/,/END OMIT/
 
 
-* Channels  ...
+* Channels
 
 Goroutines communicate to each other via channels (typed conduit)
 
@@ -561,7 +563,7 @@ Channels must be created before use (default value is nil)
 
     ch := make(chan int)
 
-- Sends and receives block until the other side is ready (bounded)
+- Send and receive functions block until the other side is ready (bounded)
 - Once a channel has been closed, you cannot send a value on this channel, but you can still receive from the channel.
 
 * Synchronization via Channels
@@ -606,46 +608,25 @@ _sync.WaitGroup_ provides a goroutine synchronization mechanism in Golang
 
 
 
-* Go Proverbs
+* Take away
 
-Don't communicate by sharing memory, share memory by communicating.
 
 Concurrency is not parallelism.
 
-Channels orchestrate; mutexes serialize.
+- Don't communicate by sharing memory, share memory by communicating.
 
-The bigger the interface, the weaker the abstraction.
-
-Make the zero value useful.
-
-interface{} says nothing.
-
-Gofmt's style is no one's favorite, yet gofmt is everyone's favorite.
-
-A little copying is better than a little dependency.
-
-Syscall must always be guarded with build tags.
-
-* Go Proverbs ...
-
-Cgo must always be guarded with build tags.
-
-Cgo is not Go.
-
-With the unsafe package there are no guarantees.
+- Channels orchestrate; mutexes serialize.
 
 Clear is better than clever.
 
-Reflection is never clear.
+- The bigger the interface, the weaker the abstraction.
 
-Errors are values.
+- A little copying is better than a little dependency.
 
-Don't just check errors, handle them gracefully.
+Errors are values. Don't just check errors, handle them gracefully.
+
+Gofmt's style is no one's favorite, yet gofmt is everyone's favorite.
 
 Design the architecture, name the components, document the details.
 
-Documentation is for users.
-
-Don't panic.
-
-
+*Don't* *panic.*

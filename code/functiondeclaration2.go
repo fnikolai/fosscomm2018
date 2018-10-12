@@ -3,13 +3,12 @@ package main
 import "fmt"
 
 // START OMIT
-func div(a, b int) (quotient int, mod int) {
-	return a / b, a % b
-}
-
 func main() {
-	v, r := div(5, 2)
-	fmt.Println(v, r)
+	var divident = 503
+	divideby := func(d int) (quotient int, mod int) { // HL
+		return divident / d, divident % d // HL
+	}
+	fmt.Println(divideby(2)) // HL
 }
 
 // END OMIT

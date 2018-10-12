@@ -9,10 +9,13 @@ type Person struct {
 
 func main() {
 	// START OMIT
-	var archenemy = struct {
-		Person
+	var archenemy = struct { // Anonymous struct // HL
+		Person      // Composed	// HL
 		Nationality string
-	}{Person{"Austin Powers", "Mike Myers"}, "British"}
+	}{
+		Person{"Austin Powers", "Mike Myers"},
+		"British",
+	}
 	fmt.Println(archenemy)
 	// END OMIT
 }
