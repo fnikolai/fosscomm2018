@@ -6,11 +6,12 @@ Golang Workshop, Fosscomm Oct/2018
 
 
 - Presenter:
-[[http://github.com/fnikolai][Fotis Nikolaidis]]
+        Fotis Nikolaidis
 
+- Thanks to:
+        Manos Ikarios
 
-- Credits:
-[[manos.ikarios@gmail.com][Manos Ikarios]]
+Credits:
 [[http://github.com/baijum/presentation/golang_workshop][Baiju Muthukadan]]
 [[http://www.slideshare.net/spf13/go-firstapp][Steven Francia]]
 
@@ -18,17 +19,19 @@ Golang Workshop, Fosscomm Oct/2018
 * Fotis Nikolaidis 
 Contact
 
-    nikolaidis.fotis@gmail.com
+    email:      nikolaidis.fotis@gmail.com
+    git:        http://github.com/fnikolai
+    linkedin:   https://www.linkedin.com/in/fotis-nikolaidis-444a6634
 
 Experience
 
-- ~3 years @ French Alternative Energies and Atomic Energy Commission (CEA/DAM/DIF)
-- ~3 years @ European Organization for Nuclear Research (IT-DSS-TAB, LHCb)
-- ~3 years @ Foundation of Research and Technology (CARV, TNL)
+    ~3 years @ French Alternative Energies and Atomic Energy Commission (CEA/DAM/DIF)
+    ~3 years @ European Organization for Nuclear Research (IT-DSS-TAB, LHCb)
+    ~3 years @ Foundation of Research and Technology (CARV, TNL)
 
 Others
 
-- Receiver of ~3 years Marie Curie Grant (BigStorage ITN)
+    Receiver of ~3 years Marie Curie Grant (BigStorage ITN)
 
 
 * Ground Rules
@@ -36,8 +39,7 @@ Others
 - Workshops are hard, everyone works at a different pace
 - We will move on when about 50% are ready
 - Slides are online, feel free to work ahead or catch up
-- Talk -> exercise -> talk -> exercise ...
-- Short Q&A in between
+- Talk -> exercise -> Q&A -> talk -> exercise ...
 
 .image image/gopher.png 250 _ 
 
@@ -51,16 +53,16 @@ Others
 
 * Agenda
 
-- General facts
-- Running a hello world
-- Reasons to use Go
-- Development environment setup
-- Types
-- Functions
-- Data structures
-- Control structures
-- Interfaces
-- Concurrency
+- General facts and Reasons to use GO
+- Data structures (primitives, arrays, maps, structs, ...)
+- Control structures (functions, if, switch, ...)
+- Exercise 1
+- Defered execution, panic/recover, interfaces, 
+- Exercise 2
+- Concurrency 
+- Exercise 3
+- Lunch
+
 
 
 * Moore's law is failing
