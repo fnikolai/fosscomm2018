@@ -3,15 +3,26 @@ Hey Ho Let's GO
 Golang Workshop, Fosscomm Oct/2018
 
 Fotis Nikolaidis
-- email:      nikolaidis.fotis@gmail.com
-- git:        http://github.com/fnikolai
-- linkedin:   https://www.linkedin.com/in/fotis-nikolaidis-444a6634
-
 
 Credits:
 [[manos.ikarios@gmail.com][Manos Ikarios]]
 [[http://github.com/baijum/presentation/golang_workshop][Baiju Muthukadan]]
 
+
+
+* Hello, Workshopers !
+
+To play with Go programming online: [[http://play.golang.org]]
+
+.play code/hello.go
+
+Presentation material
+
+    http://github.com/fnikolai/fosscomm2019
+
+Contact
+
+    nikolaidis.fotis@gmail.com
 
 * Ground Rules
 
@@ -33,10 +44,11 @@ Credits:
 - Defered execution, panic/recover, interfaces, 
 - Exercise 2 (Veteran)
 - Concurrent programming
-- Exercise 3 (Captain Chief)
+- Exercise 3 (Master Chief)
 - Lunch
 
 
+* Let's GO ...
 
 * Moore's law is failing
 The number of transistors on a chip doubles every year while the costs are halved
@@ -56,10 +68,10 @@ Performance upper bound when a fixed workload is moved to a more parallel enviro
 
 Step beyond monolithic applications 
 
-    - Coordinate processes          holy grail since '60s
+    - Coordinate processes          shared memory versus message passing
     - Minimal side effects:         components do not interfere accidently with another
 
-Larges codebase
+Large codebase
 
     - Reusable code:                if it exists, use it
     - Minimal boilerplate code:     avoid lines that would not exist in pseudocode
@@ -67,11 +79,11 @@ Larges codebase
 Thousands of developers
 
     - Simple language:              rapid productivity
-    - Formal verification:          ensure that a component does what it claims to do    
+    - Clean code:                   if something similar exists, modify it
 
 Diverse backgrounds
 
-    - Clean code:                   if something similar exists, modify it
+    - Formal verification:          ensure that a component does what it claims to do    
     - Language ecosystem:           standardized set of tools
 
 
@@ -86,15 +98,13 @@ Diverse backgrounds
 
 * Go in a Nutshell
 
-- Statically typed
+- Go programs are made up of *packages*: code organization, faster compilation 
 - Syntax similar to Java/C/C++, but less parentheses and no semicolons
 - Compiles to native code (no JVM)
-- No classes, but structs with methods
-- Interfaces
-- No implementation inheritance. There's type embedding, though.
-- Functions are first class citizens
-- Functions can return multiple values
-- Has closures
+- No classes, but structs with methods. No inheritance, but type embedding
+- Interfaces  (a kind of duck-typing)
+- Statically typed: type resolved at compile type
+- Functions-class functions : passed as an argument, returned from a function, modified, and assigned to a variable
 - Pointers, but not pointer arithmetic
 - Built-in concurrency primitives: Goroutines and Channels
 
@@ -113,16 +123,6 @@ Diverse backgrounds
 - [[https://github.com/golang/go/wiki/SuccessStories][https://github.com/golang/go/wiki/SuccessStories]]
 
 
-
-* Hello, Workshopers !
-Go programs are made up of *packages*: code organization, faster compilation 
-
-- Executables are in package *main*
-
-.play code/hello.go
-
-- To play with Go programming online: [[http://play.golang.org]]
-- The presentation tool is written in GO
 
 * Keywords
 
@@ -207,7 +207,8 @@ Return values go after function declaration
     func functionName() (ret0 string)               // Return named value
     func functionName() (ret0 string, ret1 int)     // Return multiple named values
 
-Can be used as values and as closures
+
+Functions are first-class citizens (and support Closures)
 
 .play code/functiondeclaration2.go /START OMIT/,/END OMIT/
 
