@@ -5,13 +5,10 @@ Hey Ho Let's GO
 Golang Workshop, Fosscomm Oct/2018
 
 
-- Presenter:
-        Fotis Nikolaidis
-
-- Thanks to:
-        Manos Ikarios
+- Presenter: Fotis Nikolaidis
 
 Credits:
+Manos Ikarios
 [[http://github.com/baijum/presentation/golang_workshop][Baiju Muthukadan]]
 [[http://www.slideshare.net/spf13/go-firstapp][Steven Francia]]
 
@@ -37,7 +34,7 @@ Others
 * Ground Rules
 
 - Workshops are hard, everyone works at a different pace
-- We will move on when about 50% are ready
+- We will move on when most of the people are ready
 - Slides are online, feel free to work ahead or catch up
 - Talk -> exercise -> Q&A -> talk -> exercise ...
 
@@ -45,7 +42,7 @@ Others
 
 * Requirements
 - Experience in some other programming language (Perl, Python, C, C++, Java,..)
-- Laptop with Internet connectivity
+- Laptop with Internet connection
 - Operating system with Go support (GNU/Linux or Mac OS or Windows)
 - Know how to use [[http://git-scm.com/doc][Git version control system]]
 - Comfortable with one shell (Bash, Zsh, PowerShell etc.)
@@ -81,9 +78,9 @@ Performance upper bound when a fixed workload is moved to a more parallel enviro
 
 Larges codebase
 
-    - Reusable code:                if exists, use it
+    - Reusable code:                if it exists, use it
     - Minimal boilerplate code:     avoid lines that would not exist in pseudocode
-    - Minimal side effects:         one component do not accidently interfer with another
+    - Minimal side effects:         components do not interfere accidently with another
 
 Thousands of developers
 
@@ -93,12 +90,12 @@ Thousands of developers
 Diverse backgrounds
 
     - Clean code:                   if something similar exists, modify it
-    - Language ecosystem:           standardize set of tools
+    - Language ecosystem:           standardized set of tools
 
 
 * What is GO ?
 - General Purpose Programing Language created at Google by R. Griesemer, R. Pike and K. Thompson in 2009
-- Type-safe, memory-safe, garbage collected, with Built-in concurrency (CSP-style)
+- Type-safe, memory-safe, with garbage collection and Built-in concurrency (CSP-style)
 - [[http://commandcenter.blogspot.in/2012/06/less-is-exponentially-more.html][Simplicity]], 25 keywords (less than C,C++,Python etc.)
 
 .image image/go2.png _ 500
@@ -190,7 +187,7 @@ Type and initialization valures are explicitly specified
         var presenter bool = true
         var name, place string = "Fotis", "Fosscomm"
 
-Type is inferred from the values that is given for initialization
+Type is inferred from the value that is given for initialization
 
 	    var place, name, presenter = "fosscomm2018", "Fotis", true // string, string, bool
 
@@ -217,7 +214,7 @@ C syntax
 Go syntax (no semicolons, *camelCase* naming, *UpperCase* denote visibility)
 
         randomNumber int                        // not visible outside the package
-        pointerToRandomNumber *int              // not visisble outside the package
+        pointerToRandomNumber *int              // not visible outside the package
         ArrayOfRandomNumbers [3]int             // visible outside the package
 
         func main(int, []string) int
