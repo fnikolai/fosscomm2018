@@ -60,9 +60,9 @@ The number of transistors on a chip doubles every year while the costs are halve
 * Amdahls' law is raising
 Performance upper bound when a fixed workload is moved to a more parallel environment
 
-.image image/amdahls.png 400 _
+.image image/amdahls.png 350 _
 
-- Pseudo-parallel process used to communicate through shared memory. Not any more
+- Pseudo-parallel process used to communicate via shared memory. Not any more
 
 * Facts
 
@@ -104,7 +104,7 @@ Diverse backgrounds
 - No classes, but structs with methods. No inheritance, but type embedding
 - Interfaces  (a kind of duck-typing)
 - Statically typed: type resolved at compile type
-- Functions-class functions : passed as an argument, returned from a function, modified, and assigned to a variable
+- First-class functions : passed as an argument, returned from a function, modified, and assigned to a variable
 - Pointers, but not pointer arithmetic
 - Built-in concurrency primitives: Goroutines and Channels
 
