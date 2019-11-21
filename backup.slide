@@ -189,7 +189,7 @@ Few commonly used commands:
 - Initialization logic for package goes into *init* function
     init(){}
 
-
+http://blog.ralch.com/tutorial/golang-conditional-compilation/
 
 package main
 
